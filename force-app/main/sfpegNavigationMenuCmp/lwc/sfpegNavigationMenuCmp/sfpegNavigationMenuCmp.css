@@ -1,0 +1,5 @@
+.sfpegHideTab {
+    height: 0px !important;
+    line-height: 0px !important;
+    visibility: hidden !important;
+}

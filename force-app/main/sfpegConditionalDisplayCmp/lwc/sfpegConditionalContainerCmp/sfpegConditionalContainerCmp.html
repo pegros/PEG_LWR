@@ -1,0 +1,53 @@
+<template>
+    <!-- Main Component Display -->
+    <section if:true={showSection.s1}>
+        <slot name="section1"></slot>
+    </section>
+    <section if:true={showSection.s2}>
+        <slot name="section2"></slot>
+    </section>
+    <section if:true={showSection.s3}>
+        <slot name="section3"></slot>
+    </section>
+    <section if:true={showSection.s4}>
+        <slot name="section4"></slot>
+    </section>
+    <section if:true={showSection.s5}>
+        <slot name="section5"></slot>
+    </section>
+    <section if:true={showSection.default}>
+        <slot name="defaultSection"></slot>
+    </section>
+
+    <!-- Error Display -->
+    <div if:true={errorMessage} class="slds-box slds-box_small slds-theme_default slds-media slds-media_center">
+        <div class="slds-media__figure">
+            <lightning-icon icon-name="utility:error"   size="x-small"    variant="error">
+            </lightning-icon>
+        </div>
+        <div class="slds-media__body">
+            <lightning-formatted-text   value={errorMessage}    class="slds-text-color_error">
+            </lightning-formatted-text>
+        </div>
+    </div>
+
+    <!-- Debug Information Display -->
+    <template if:true={isDebug}>
+        <div class="slds-box slds-box_small slds-theme_default slds-m-top_x-small"  >
+            <dl class="slds-dl_horizontal">
+                <dt class="slds-dl_horizontal__label slds-truncate">Context:</dt>
+                <dd class="slds-dl_horizontal__detail">{objectApiName} with ID {recordId} on field {sourceField}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Conditions:</dt>
+                <dd class="slds-dl_horizontal__detail">#1: {list1} / #2: {list2} / #3: {list3} / #4:{list4} / #5: {list5} / default? {hasDefault}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
+                <dd class="slds-dl_horizontal__detail">
+                    <lightning-formatted-url    value="https://github.com/pegros/PEG_LWR/blob/master/help/sfpegConditionalContainerCmp.md"
+                                                label="See Help on GitHub"
+                                                target="_blank">
+                    </lightning-formatted-url>
+                </dd>
+            </dl>
+        </div>
+    </template>
+
+</template>

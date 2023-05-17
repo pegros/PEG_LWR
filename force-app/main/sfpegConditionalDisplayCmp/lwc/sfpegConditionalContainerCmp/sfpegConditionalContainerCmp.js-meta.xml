@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>SF PEG Conditional Container</masterLabel>
+    <description>Simple Conditional Display Container</description>
+    <targets>
+        <target>lightningCommunity__Page_Layout</target>  
+        <target>lightningCommunity__Default</target>  
+        <target>lightningCommunity__Theme_Layout</target>  
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property   name="sourceField"
+                        label="Source Field"
+                        type="String"
+                        description="Field to use to evaluate display condition." />
+            <property   name="isMvField"
+                        label="Multi-Value Source Field?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to indicate that the sourceField is a multi-value." />
+            <property   name="list1"
+                        label="Condition #1"
+                        type="String"
+                        description="List of values for section #1." />
+            <property   name="list2"
+                        label="Condition #2"
+                        type="String"
+                        description="List of values for section #2." />
+            <property   name="list3"
+                        label="Condition #3"
+                        type="String"
+                        description="List of values for section #3." />
+            <property   name="list4"
+                        label="Condition #4"
+                        type="String"
+                        description="List of values for section #4." />
+            <property   name="list5"
+                        label="Condition #5"
+                        type="String"
+                        description="List of values for section #5." />
+            <property   name="hasDefault"
+                        label="Handle Default?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to activate a default section (if conditions #1 to #5 fail)." />
+
+            <property   name="forceDisplay"
+                        label="Force Complete Display?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to force the display of all sections (for Builder configuration)." />
+
+            <property   name="isDebug"
+                        label="Show Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to activate debug information." />
+
+            <property   name="objectApiName"
+                        label="Object API Name"
+                        type="String"
+                        default="{!objectApiName}"
+                        description="API Name of Object for evaluation (usually current object, but may be User)."/>
+            <property   name="recordId"
+                        label="Record ID"
+                        type="String"
+                        default="{!recordId}"
+                        description="ID of Record for evaluation (usually current record). Current User ID is used if no data is provided."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

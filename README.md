@@ -1,5 +1,7 @@
 # ![Logo](/media/Logo.png) &nbsp; SFPEG LWR Components
 
+⚠️ This repository is still Work In Progress 🚧
+
 ## Introduction
 
 This package contains a set of standalone LWC components adressing very specific and simple use cases

@@ -32,6 +32,10 @@ may be added, leveraging criteria on field values of the current record or User.
 
 ![Conditional Display](/media/sfpegConditionalDisplayCmp.png)
 
+### [sfpegNavigationMenuCmp](/help/sfpegNavigationMenuCmp.md)
+This component enables to display a navigation menuconfigured in a LWR Experience Site.
+
+![Conditional Display](/media/sfpegNavigationMenuCmp.png)
 
 
 ## Technical Details

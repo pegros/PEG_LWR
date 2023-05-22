@@ -1,21 +1,21 @@
 <template>
     <!-- Main Component Display -->
-    <section if:true={showSection.s1}>
+    <section if:true={showSection.s1} class={wrappingClass}>
         <slot name="section1"></slot>
     </section>
-    <section if:true={showSection.s2}>
+    <section if:true={showSection.s2} class={wrappingClass}>
         <slot name="section2"></slot>
     </section>
-    <section if:true={showSection.s3}>
+    <section if:true={showSection.s3} class={wrappingClass}>
         <slot name="section3"></slot>
     </section>
-    <section if:true={showSection.s4}>
+    <section if:true={showSection.s4} class={wrappingClass}>
         <slot name="section4"></slot>
     </section>
-    <section if:true={showSection.s5}>
+    <section if:true={showSection.s5} class={wrappingClass}>
         <slot name="section5"></slot>
     </section>
-    <section if:true={showSection.default}>
+    <section if:true={showSection.default} class={wrappingClass}>
         <slot name="defaultSection"></slot>
     </section>
 

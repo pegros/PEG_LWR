@@ -56,6 +56,7 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
     @api list4;                 // set of possible field values for section 4
     @api list5;                 // set of possible field values for section 5
     @api hasDefault;            // Flag to activate default section
+    @api wrappingClass;         // CSS classes to wrap each section
 
     @api objectApiName;         // Object API Name for current page record (if any)
     @api recordId;              // ID of current page record (if any)

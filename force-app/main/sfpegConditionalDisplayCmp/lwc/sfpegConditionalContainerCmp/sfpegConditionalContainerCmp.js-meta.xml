@@ -53,6 +53,11 @@
                         default="false"
                         description="Flag to force the display of all sections (for Builder configuration)." />
 
+            <property   name="wrappingClass"
+                        label="Wrapping CSS"
+                        type="String"
+                        description=" CSS classes to wrap each section." />
+
             <property   name="isDebug"
                         label="Show Debug?"
                         type="Boolean"

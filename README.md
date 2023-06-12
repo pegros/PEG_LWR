@@ -26,16 +26,16 @@ This package provides a set of Site Builder components listed hereafter.
 Detailed information about these components (behaviour, configuration guidelines,
 technical implementation principles) is available in their dedicated pages.
 
-### [sfpegConditionalDisplayCmp](/help/sfpegConditionalDisplayCmp.md)
+### [sfpegConditionalContainerCmp](/help/sfpegConditionalContainerCmp.md)
 This container component provides up to 6 conditionaly displayed zones in which other components
 may be added, leveraging criteria on field values of the current record or User.
 
-![Conditional Display](/media/sfpegConditionalDisplayCmp.png)
+![Conditional Container](/media/sfpegConditionalContainerCmp.png)
 
 ### [sfpegNavigationMenuCmp](/help/sfpegNavigationMenuCmp.md)
 This component enables to display a navigation menuconfigured in a LWR Experience Site.
 
-![Conditional Display](/media/sfpegNavigationMenuCmp.png)
+![Navigation Menu](/media/sfpegNavigationMenuCmp.png)
 
 
 ## Technical Details

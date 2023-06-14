@@ -48,11 +48,12 @@
                         label="Condition #5"
                         type="String"
                         description="List of values for section #5." />
+            
             <property   name="hasDefault"
                         label="Handle Default?"
                         type="Boolean"
                         default="false"
-                        description="Flag to activate a default section (if conditions #1 to #5 fail)." />
+                        description="Flag to activate a default section (if conditions #1 to #10 fail)." />
         
             <property   name="wrappingClass"
                         label="Wrapping CSS"
@@ -68,13 +69,35 @@
             <property   name="objectApiName"
                         label="Object API Name"
                         type="String"
-                        default="{!objectApiName}"
+                        default="{!Route.objectApiName}"
                         description="API Name of Object for evaluation (usually current object, but may be User)."/>
             <property   name="recordId"
                         label="Record ID"
                         type="String"
-                        default="{!recordId}"
+                        default="{!Route.recordId}"
                         description="ID of Record for evaluation (usually current record). Current User ID is used if no data is provided."/>
+            
+            <property   name="list6"
+                        label="Obsolète 🚫"
+                        type="String"
+                        description="List of values for section #6 (not working)." />
+            <property   name="list7"
+                        label="Obsolète 🚫"
+                        type="String"
+                        description="List of values for section #7 (not working)." />
+            <property   name="list8"
+                        label="Obsolète 🚫"
+                        type="String"
+                        description="List of values for section #8 (not working)." />
+            <property   name="list9"
+                        label="Obsolète 🚫"
+                        type="String"
+                        description="List of values for section #9 (not working)." />
+            <property   name="list10"
+                        label="Obsolète 🚫"
+                        type="String"
+                        description="List of values for section #10 (not working)." />
+        
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

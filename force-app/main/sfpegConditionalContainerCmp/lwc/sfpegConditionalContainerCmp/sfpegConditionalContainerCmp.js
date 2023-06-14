@@ -40,7 +40,7 @@ import currentUserId from '@salesforce/user/Id';
  * @slot section4
  * @slot section5
  * @slot defaultSection
- */
+ **/
 
 export default class SfpegConditionalContainerCmp extends LightningElement {
 
@@ -55,6 +55,11 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
     @api list3;                 // set of possible field values for section 3
     @api list4;                 // set of possible field values for section 4
     @api list5;                 // set of possible field values for section 5
+    @api list6;                 // set of possible field values for section 6
+    @api list7;                 // set of possible field values for section 7
+    @api list8;                 // set of possible field values for section 8
+    @api list9;                 // set of possible field values for section 9
+    @api list10;                // set of possible field values for section 10
     @api hasDefault;            // Flag to activate default section
     @api wrappingClass;         // CSS classes to wrap each section
 
@@ -99,8 +104,13 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
         this.recordId = this.recordId || currentUserId;
         if (this.isDebug) console.log('connected: recordId reset ', this.recordId);
 
-        this.field2fetch = this.objectApiName + '.' + this.sourceField;
-        if (this.isDebug) console.log('connected: field2fetch init ', this.field2fetch);
+        if ((this.objectApiName) && (this.sourceField)) {
+            this.field2fetch = this.objectApiName + '.' + this.sourceField;
+            if (this.isDebug) console.log('connected: field2fetch init ', this.field2fetch);
+        }
+        else {
+            console.warn('connected: missing objectApiName or sourceField');
+        }
 
         if (this.isDebug) console.log('connected: END');
     }
@@ -165,16 +175,5 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
 
         if (this.isDebug) console.log('wiredRecord: END');
     }
-
-   /* @wire(getObjectInfo, { objectApiName: "$objectApiName" })
-    wiredObject({ error, data }) {
-        if (this.isDebug) console.log('wiredObject: START');
-
-        if (this.isDebug) console.log('wiredObject: data ', JSON.stringify(data));
-        if (this.isDebug) console.log('wiredObject: erro ', JSON.stringify(error));
-
-        if (this.isDebug) console.log('wiredObject: END');
-    }
-    */
 
 }

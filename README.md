@@ -27,13 +27,21 @@ Detailed information about these components (behaviour, configuration guidelines
 technical implementation principles) is available in their dedicated pages.
 
 ### [sfpegConditionalContainerCmp](/help/sfpegConditionalContainerCmp.md)
-This container component provides up to 6 conditionaly displayed zones in which other components
+This container component provides up to 10 conditionaly displayed zones in which other components
 may be added, leveraging criteria on field values of the current record or User.
 
 ![Conditional Container](/media/sfpegConditionalContainerCmp.png)
 
+
+### [sfpegConditionalLayout](/help/sfpegConditionalLayout.md)
+This container component the ability to display a section based on a single condition
+evaluated from page context using a variety of comparison operators.
+
+![Conditional Layout](/media/sfpegConditionalLayout.png)
+
 ### [sfpegNavigationMenuCmp](/help/sfpegNavigationMenuCmp.md)
-This component enables to display a navigation menuconfigured in a LWR Experience Site.
+This component enables to display a navigation menu configured in a LWR Experience Site
+as a list of tabs or links.
 
 ![Navigation Menu](/media/sfpegNavigationMenuCmp.png)
 

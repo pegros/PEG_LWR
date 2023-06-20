@@ -18,12 +18,13 @@
                         label="Display Mode"
                         type="String"
                         datasource="tabs,links"
-                        default="tabs"
+                        default="links"
                         description="Display mode for the Navigation Menu" />
 
             <property   name="currentTab"
                         label="Current Tab label"
                         type="String"
+                        default="Current"
                         description="When in tabs display mode, label of the currently selected tab." />
                         
             <property   name="showHome"

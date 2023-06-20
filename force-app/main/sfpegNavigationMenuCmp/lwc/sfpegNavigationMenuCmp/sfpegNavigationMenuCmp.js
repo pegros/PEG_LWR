@@ -130,6 +130,7 @@ export default class SfpegNavigationMenuCmp extends NavigationMixin(LightningEle
 
         let selectedTab = event.target.value;
         if (this.isDebug) console.log('handleTabActive: selectedTab identified ',selectedTab);
+        if (this.isDebug) console.log('handleTabActive: currentTab ',this.currentTab);
 
         if ((this.currentTab) && (selectedTab === this.currentTab)) {
             if (this.isDebug) console.log('handleTabActive: END NavigationMenu / ignoring selection of current tab');

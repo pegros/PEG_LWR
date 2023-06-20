@@ -1,0 +1,16 @@
+<template>
+    <!-- Main Component Display -->
+    <template lwc:if={showCondition}>
+        <section class={wrappingClass}>
+            <p if:true={forceDisplay} class="debugInfo"> IF "{currentValue}" {operator} "{targetValue}"</p>
+            <slot name="conditionSection"></slot>
+        </section>
+    </template>
+    <template lwc:if={showDefault}>
+        <section class={wrappingClass}>
+            <p if:true={forceDisplay} class="debugInfo"> ELSE </p>
+            <slot name="defaultSection"></slot>
+        </section>
+    </template>
+
+</template>

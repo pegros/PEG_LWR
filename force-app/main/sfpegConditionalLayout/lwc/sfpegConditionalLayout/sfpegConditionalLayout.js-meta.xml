@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>SF PEG Conditional Layout</masterLabel>
+    <description>Simple Conditional Layout</description>
+    <targets>
+        <target>lightningCommunity__Page_Layout</target>  
+        <target>lightningCommunity__Default</target>  
+        <target>lightningCommunity__Theme_Layout</target>  
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property   name="forceDisplay"
+                        label="Force Complete Display?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to force the display of all sections (for Builder configuration)." />
+
+            <property   name="currentValue"
+                        label="Current Value"
+                        type="String"
+                        description="Field value provided from the page context." />
+            <property   name="operator"
+                        label="Operator"
+                        type="String"
+                        datasource="EQUALS,NOT EQUALS,IN,NOT IN,CONTAINS,CONTAINS NOT,MATCHES,MATCHES NOT"
+                        description="Comparison operator" />
+            <property   name="targetValue"
+                        label="Target Value"
+                        type="String"
+                        description="Target value with which the current value should be compared" />
+            <property   name="hasDefault"
+                        label="Show Default?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to activate default section when condition not met." />
+
+            <property   name="wrappingClass"
+                        label="Wrapping CSS"
+                        type="String"
+                        description=" CSS classes to wrap each section." />
+
+            <property   name="isDebug"
+                        label="Show Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to activate debug information." />
+
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

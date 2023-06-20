@@ -20,6 +20,26 @@
         <p if:true={forceDisplay} class="debugInfo">Section #5 - {sourceField} = {list5}</p>
         <slot name="section5"></slot>
     </section>
+    <section if:true={showSection.s6} class={wrappingClass}>
+        <p if:true={forceDisplay} class="debugInfo">Section #6 - {sourceField} = {list6}</p>
+        <slot name="section6"></slot>
+    </section>
+    <section if:true={showSection.s8} class={wrappingClass}>
+        <p if:true={forceDisplay} class="debugInfo">Section #7 - {sourceField} = {list7}</p>
+        <slot name="section7"></slot>
+    </section>
+    <section if:true={showSection.s8} class={wrappingClass}>
+        <p if:true={forceDisplay} class="debugInfo">Section #8 - {sourceField} = {list8}</p>
+        <slot name="section8"></slot>
+    </section>
+    <section if:true={showSection.s9} class={wrappingClass}>
+        <p if:true={forceDisplay} class="debugInfo">Section #9 - {sourceField} = {list9}</p>
+        <slot name="section9"></slot>
+    </section>
+    <section if:true={showSection.s10} class={wrappingClass}>
+        <p if:true={forceDisplay} class="debugInfo">Section #10 - {sourceField} = {list10}</p>
+        <slot name="section10"></slot>
+    </section>
     <section if:true={showSection.default} class={wrappingClass}>
         <p if:true={forceDisplay} class="debugInfo">Default Section</p>
         <slot name="defaultSection"></slot>

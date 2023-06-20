@@ -48,7 +48,27 @@
                         label="Condition #5"
                         type="String"
                         description="List of values for section #5." />
-            
+            <property   name="list6"
+                        label="Condition #6"
+                        type="String"
+                        description="List of values for section #6." />
+            <property   name="list7"
+                        label="Condition #7"
+                        type="String"
+                        description="List of values for section #7." />
+            <property   name="list8"
+                        label="Condition #8"
+                        type="String"
+                        description="List of values for section #8." />
+            <property   name="list9"
+                        label="Condition #9"
+                        type="String"
+                        description="List of values for section #9." />
+            <property   name="list10"
+                        label="Condition #10"
+                        type="String"
+                        description="List of values for section #10." />
+
             <property   name="hasDefault"
                         label="Handle Default?"
                         type="Boolean"
@@ -77,27 +97,6 @@
                         default="{!Route.recordId}"
                         description="ID of Record for evaluation (usually current record). Current User ID is used if no data is provided."/>
             
-            <property   name="list6"
-                        label="Obsolète 🚫"
-                        type="String"
-                        description="List of values for section #6 (not working)." />
-            <property   name="list7"
-                        label="Obsolète 🚫"
-                        type="String"
-                        description="List of values for section #7 (not working)." />
-            <property   name="list8"
-                        label="Obsolète 🚫"
-                        type="String"
-                        description="List of values for section #8 (not working)." />
-            <property   name="list9"
-                        label="Obsolète 🚫"
-                        type="String"
-                        description="List of values for section #9 (not working)." />
-            <property   name="list10"
-                        label="Obsolète 🚫"
-                        type="String"
-                        description="List of values for section #10 (not working)." />
-        
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

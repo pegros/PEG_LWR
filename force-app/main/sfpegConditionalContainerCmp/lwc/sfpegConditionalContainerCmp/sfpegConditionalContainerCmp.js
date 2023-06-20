@@ -39,8 +39,13 @@ import currentUserId from '@salesforce/user/Id';
  * @slot section3
  * @slot section4
  * @slot section5
+ * @slot section6
+ * @slot section7
+ * @slot section8
+ * @slot section9
+ * @slot section10
  * @slot defaultSection
- **/
+ */
 
 export default class SfpegConditionalContainerCmp extends LightningElement {
 
@@ -97,6 +102,11 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
             s3:this.forceDisplay,
             s4:this.forceDisplay,
             s5:this.forceDisplay,
+            s6:this.forceDisplay,
+            s7:this.forceDisplay,
+            s8:this.forceDisplay,
+            s9:this.forceDisplay,
+            s10:this.forceDisplay,
             default:this.forceDisplay
         };  
         if (this.isDebug) console.log('connected: showSection init ', JSON.stringify(this.showSection));
@@ -149,6 +159,11 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
                     showSection.s3 = (this.list3 ? fieldValues.includes(this.list3) : false);
                     showSection.s4 = (this.list4 ? fieldValues.includes(this.list4) : false);
                     showSection.s5 = (this.list5 ? fieldValues.includes(this.list5) : false);
+                    showSection.s6 = (this.list6 ? fieldValues.includes(this.list6) : false);
+                    showSection.s7 = (this.list7 ? fieldValues.includes(this.list7) : false);
+                    showSection.s8 = (this.list8 ? fieldValues.includes(this.list8) : false);
+                    showSection.s9 = (this.list9 ? fieldValues.includes(this.list9) : false);
+                    showSection.s10 = (this.list10 ? fieldValues.includes(this.list10) : false);
                 }
                 else {
                     if (this.isDebug) console.log('wiredRecord: handling non multi-value field');
@@ -157,8 +172,13 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
                     showSection.s3 = this.list3?.includes(fieldValue);
                     showSection.s4 = this.list4?.includes(fieldValue);
                     showSection.s5 = this.list5?.includes(fieldValue);
+                    showSection.s6 = this.list6?.includes(fieldValue);
+                    showSection.s7 = this.list7?.includes(fieldValue);
+                    showSection.s8 = this.list8?.includes(fieldValue);
+                    showSection.s9 = this.list9?.includes(fieldValue);
+                    showSection.s10 = this.list10?.includes(fieldValue);
                 }
-                if ((this.hasDefault) && !(showSection.s1 || showSection.s2 || showSection.s3 || showSection.s4 || showSection.s5)){
+                if ((this.hasDefault) && !(showSection.s1 || showSection.s2 || showSection.s3 || showSection.s4 || showSection.s5 || showSection.s6 || showSection.s7 || showSection.s8 || showSection.s9 || showSection.s10)){
                     showSection.default = true;
                 } 
                 this.showSection = showSection;

@@ -94,7 +94,7 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
     //----------------------------------------------------------------
 
     connectedCallback() {
-        if (this.isDebug) console.log('connected: START');
+        if (this.isDebug) console.log('connected: START ConditionalContainer');
 
         this.showSection = {
             s1:this.forceDisplay,
@@ -122,7 +122,7 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
             console.warn('connected: missing objectApiName or sourceField');
         }
 
-        if (this.isDebug) console.log('connected: END');
+        if (this.isDebug) console.log('connected: END ConditionalContainer');
     }
 
     @wire(getRecord, { "recordId": '$recordId', "fields": '$field2fetch' })

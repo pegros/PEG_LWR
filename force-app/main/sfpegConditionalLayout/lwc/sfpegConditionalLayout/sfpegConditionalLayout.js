@@ -41,9 +41,31 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
     //----------------------------------------------------------------
     // Configuration Parameters
     //----------------------------------------------------------------
-    @api currentValue;          // Field value provided from the page context.
+    //@api currentValue;          // Field value provided from the page context.
+    _currentValue;
+    @api 
+    get currentValue() {
+        return this._currentValue;
+    }
+    set currentValue(value) {
+        if (this.isDebug) console.log('set: currentValue to ',value);
+        this._currentValue = value;
+        this.evalCondition();
+    }
+    
     @api operator;              // Comparison operator
-    @api targetValue;           // Target value with which the current value should be compared
+    //@api targetValue;           // Target value with which the current value should be compared
+    _targetValue;
+    @api 
+    get targetValue() {
+        return this._targetValue;
+    }
+    set targetValue(value) {
+        if (this.isDebug) console.log('set: targetValue to ',value);
+        this._targetValue = value;
+        this.evalCondition();
+    }
+
     @api hasDefault = false;    // Flag to activate default section
 
     @api wrappingClass;         // CSS classes to wrap each section
@@ -68,7 +90,7 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
     // Component Initialisation
     //----------------------------------------------------------------
     connectedCallback() {
-        if (this.isDebug) console.log('connected: START');
+        if (this.isDebug) console.log('connected: START ConditionalLayout');
         if (this.isDebug) console.log('connected: currentValue ',this.currentValue);
         if (this.isDebug) console.log('connected: operator ',this.operator);
         if (this.isDebug) console.log('connected: targetValue ',this.targetValue);
@@ -78,19 +100,37 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
         this.evalCondition();
         if (this.isDebug) console.log('connected: showCondition init ',this.showCondition);
 
-        if (this.isDebug) console.log('connected: END');
+        if (this.isDebug) console.log('connected: END ConditionalLayout');
     }
 
     //----------------------------------------------------------------
     // Component Utilities
     //----------------------------------------------------------------
     evalCondition = function() {
+        if (this.isDebug) console.log('evalCondition: START with currentValue ',this.currentValue);
+
         if (this.forceDisplay) {
             this.showCondition = true;
+            if (this.isDebug) console.log('evalCondition: END / forceDisplay ');
             return;
         }
 
+        if (this.isDebug) console.log('evalCondition: evaluating operator ',this.operator);
+        if (this.isDebug) console.log('evalCondition: current value type ',typeof this.currentValue);
+        if (this.isDebug) console.log('evalCondition: target value type ',typeof this.targetValue);
         switch (this.operator) {
+            case 'IS TRUE':
+                this.showCondition = Boolean(this.currentValue);
+                break;
+            case 'IS FALSE':
+                this.showCondition = !Boolean(this.currentValue);
+                break;
+            case 'IS BLANK':
+                this.showCondition = !Boolean(this.currentValue);
+                break;
+            case 'IS NOT BLANK':
+                this.showCondition = Boolean(this.currentValue);
+                break;
             case 'EQUALS':
                 this.showCondition = (this.currentValue === this.targetValue);
                 break;
@@ -119,5 +159,6 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
             default:
                 this.showCondition = false;  
         }
+        if (this.isDebug) console.log('evalCondition: END / showCondition ', this.showCondition);
     }
 }

@@ -25,7 +25,7 @@
             <property   name="operator"
                         label="Operator"
                         type="String"
-                        datasource="EQUALS,NOT EQUALS,IN,NOT IN,CONTAINS,CONTAINS NOT,MATCHES,MATCHES NOT"
+                        datasource="IS TRUE,IS FALSE,IS BLANK,IS NOT BLANK,EQUALS,NOT EQUALS,IN,NOT IN,CONTAINS,CONTAINS NOT,MATCHES,MATCHES NOT"
                         description="Comparison operator" />
             <property   name="targetValue"
                         label="Target Value"

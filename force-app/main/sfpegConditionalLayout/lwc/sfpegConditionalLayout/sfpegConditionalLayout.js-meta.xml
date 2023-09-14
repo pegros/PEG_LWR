@@ -5,9 +5,9 @@
     <masterLabel>SF PEG Conditional Layout</masterLabel>
     <description>Simple Conditional Layout</description>
     <targets>
-        <target>lightningCommunity__Page_Layout</target>  
+        <!--<target>lightningCommunity__Page_Layout</target>  
+        <target>lightningCommunity__Theme_Layout</target>-->
         <target>lightningCommunity__Default</target>  
-        <target>lightningCommunity__Theme_Layout</target>  
         <target>lightningCommunity__Page</target>
     </targets>
     <targetConfigs>

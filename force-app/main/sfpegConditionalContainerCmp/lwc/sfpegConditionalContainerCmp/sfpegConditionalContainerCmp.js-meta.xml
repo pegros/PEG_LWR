@@ -5,9 +5,9 @@
     <masterLabel>SF PEG Conditional Container</masterLabel>
     <description>Simple Conditional Display Container</description>
     <targets>
-        <target>lightningCommunity__Page_Layout</target>  
+        <!--<target>lightningCommunity__Page_Layout</target>  
+        <target>lightningCommunity__Theme_Layout</target> -->
         <target>lightningCommunity__Default</target>  
-        <target>lightningCommunity__Theme_Layout</target>  
         <target>lightningCommunity__Page</target>
     </targets>
     <targetConfigs>
@@ -31,49 +31,65 @@
             <property   name="list1"
                         label="Condition #1"
                         type="String"
-                        description="List of values for section #1." />
+                        description="List of values (single value source field) or value (multi-value source field) for section #1" />
             <property   name="list2"
                         label="Condition #2"
                         type="String"
-                        description="List of values for section #2." />
+                        description="List of values (single value source field) or value (multi-value source field) for section #2." />
             <property   name="list3"
                         label="Condition #3"
                         type="String"
-                        description="List of values for section #3." />
+                        description="List of values (single value source field) or value (multi-value source field) for section #3." />
             <property   name="list4"
                         label="Condition #4"
                         type="String"
-                        description="List of values for section #4." />
+                        description="List of values (single value source field) or value (multi-value source field) for section #4." />
             <property   name="list5"
                         label="Condition #5"
                         type="String"
-                        description="List of values for section #5." />
+                        description="List of values (single value source field) or value (multi-value source field) for section #5." />
             <property   name="list6"
                         label="Condition #6"
                         type="String"
-                        description="List of values for section #6." />
+                        description="List of values (single value source field) or value (multi-value source field) for section #6." />
             <property   name="list7"
                         label="Condition #7"
                         type="String"
-                        description="List of values for section #7." />
+                        description="List of values (single value source field) or value (multi-value source field) for section #7." />
             <property   name="list8"
                         label="Condition #8"
                         type="String"
-                        description="List of values for section #8." />
+                        description="List of values (single value source field) or value (multi-value source field) for section #8." />
             <property   name="list9"
                         label="Condition #9"
                         type="String"
-                        description="List of values for section #9." />
+                        description="List of values (single value source field) or value (multi-value source field) for section #9." />
             <property   name="list10"
                         label="Condition #10"
                         type="String"
-                        description="List of values for section #10." />
+                        description="List of values (single value source field) or value (multi-value source field) for section #10." />
+            <property   name="list11"
+                        label="Condition #11"
+                        type="String"
+                        description="List of values (single value source field) or value (multi-value source field) for section #11" />
+            <property   name="list12"
+                        label="Condition #12"
+                        type="String"
+                        description="List of values (single value source field) or value (multi-value source field) for section #12" />
+            <property   name="list13"
+                        label="Condition #13"
+                        type="String"
+                        description="List of values (single value source field) or value (multi-value source field) for section #13" /> 
+            <property   name="list14"
+                        label="Condition #14"
+                        type="String"
+                        description="List of values (single value source field) or value (multi-value source field) for section #14" />  
 
             <property   name="hasDefault"
                         label="Handle Default?"
                         type="Boolean"
                         default="false"
-                        description="Flag to activate a default section (if conditions #1 to #10 fail)." />
+                        description="Flag to activate a default section (if conditions #1 to #14 fail)." />
         
             <property   name="wrappingClass"
                         label="Wrapping CSS"
@@ -96,7 +112,6 @@
                         type="String"
                         default="{!Route.recordId}"
                         description="ID of Record for evaluation (usually current record). Current User ID is used if no data is provided."/>
-            
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

@@ -40,6 +40,22 @@
         <p if:true={forceDisplay} class="debugInfo">Section #10 - {sourceField} = {list10}</p>
         <slot name="section10"></slot>
     </section>
+    <section if:true={showSection.s11} class={wrappingClass}>
+        <p if:true={forceDisplay} class="debugInfo">Section #11 - {sourceField} = {list11}</p>
+        <slot name="section11"></slot>
+    </section>
+    <section if:true={showSection.s12} class={wrappingClass}>
+        <p if:true={forceDisplay} class="debugInfo">Section #12 - {sourceField} = {list12}</p>
+        <slot name="section12"></slot>
+    </section>
+    <section if:true={showSection.s13} class={wrappingClass}>
+        <p if:true={forceDisplay} class="debugInfo">Section #13 - {sourceField} = {list13}</p>
+        <slot name="section13"></slot>
+    </section>
+    <section if:true={showSection.s14} class={wrappingClass}>
+        <p if:true={forceDisplay} class="debugInfo">Section #14 - {sourceField} = {list14}</p>
+        <slot name="section14"></slot>
+    </section>
     <section if:true={showSection.default} class={wrappingClass}>
         <p if:true={forceDisplay} class="debugInfo">Default Section</p>
         <slot name="defaultSection"></slot>
@@ -64,7 +80,7 @@
                 <dt class="slds-dl_horizontal__label slds-truncate">Context:</dt>
                 <dd class="slds-dl_horizontal__detail">{objectApiName} with ID {recordId} on field {sourceField}</dd>
                 <dt class="slds-dl_horizontal__label slds-truncate">Conditions:</dt>
-                <dd class="slds-dl_horizontal__detail">#1: {list1} / #2: {list2} / #3: {list3} / #4:{list4} / #5: {list5} / default? {hasDefault}</dd>
+                <dd class="slds-dl_horizontal__detail"> #1: {list1} <br/> #2: {list2} <br/> #3: {list3} <br/> #4:{list4} <br/> #5: {list5} <br/> #6: {list6} <br/> #7: {list7} <br/> #8: {list8} <br/> #9: {list9} <br/> #10: {list10} <br/> #11: {list11} <br/> #12: {list12} <br/> #13: {list13} <br/> #14: {list14}  <br/> default? {hasDefault}</dd>
                 <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
                 <dd class="slds-dl_horizontal__detail">
                     <lightning-formatted-url    value="https://github.com/pegros/PEG_LWR/blob/master/help/sfpegConditionalContainerCmp.md"

@@ -44,6 +44,10 @@ import currentUserId from '@salesforce/user/Id';
  * @slot section8
  * @slot section9
  * @slot section10
+ * @slot section11
+ * @slot section12
+ * @slot section13
+ * @slot section14
  * @slot defaultSection
  */
 
@@ -65,6 +69,11 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
     @api list8;                 // set of possible field values for section 8
     @api list9;                 // set of possible field values for section 9
     @api list10;                // set of possible field values for section 10
+    @api list11;                // set of possible field values for section 11
+    @api list12;                // set of possible field values for section 12
+    @api list13;                // set of possible field values for section 13
+    @api list14;                // set of possible field values for section 14
+
     @api hasDefault;            // Flag to activate default section
     @api wrappingClass;         // CSS classes to wrap each section
 
@@ -107,6 +116,10 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
             s8:this.forceDisplay,
             s9:this.forceDisplay,
             s10:this.forceDisplay,
+            s11:this.forceDisplay,
+            s12:this.forceDisplay,
+            s13:this.forceDisplay,
+            s14:this.forceDisplay,
             default:this.forceDisplay
         };  
         if (this.isDebug) console.log('connected: showSection init ', JSON.stringify(this.showSection));
@@ -164,6 +177,10 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
                     showSection.s8 = (this.list8 ? fieldValues.includes(this.list8) : false);
                     showSection.s9 = (this.list9 ? fieldValues.includes(this.list9) : false);
                     showSection.s10 = (this.list10 ? fieldValues.includes(this.list10) : false);
+                    showSection.s11 = (this.list10 ? fieldValues.includes(this.list11) : false);
+                    showSection.s12 = (this.list10 ? fieldValues.includes(this.list12) : false);
+                    showSection.s13 = (this.list10 ? fieldValues.includes(this.list13) : false);
+                    showSection.s14 = (this.list10 ? fieldValues.includes(this.list14) : false);
                 }
                 else {
                     if (this.isDebug) console.log('wiredRecord: handling non multi-value field');
@@ -177,8 +194,12 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
                     showSection.s8 = this.list8?.includes(fieldValue);
                     showSection.s9 = this.list9?.includes(fieldValue);
                     showSection.s10 = this.list10?.includes(fieldValue);
+                    showSection.s11 = this.list11?.includes(fieldValue);
+                    showSection.s12 = this.list12?.includes(fieldValue);
+                    showSection.s13 = this.list13?.includes(fieldValue);
+                    showSection.s14 = this.list14?.includes(fieldValue);
                 }
-                if ((this.hasDefault) && !(showSection.s1 || showSection.s2 || showSection.s3 || showSection.s4 || showSection.s5 || showSection.s6 || showSection.s7 || showSection.s8 || showSection.s9 || showSection.s10)){
+                if ((this.hasDefault) && !(showSection.s1 || showSection.s2 || showSection.s3 || showSection.s4 || showSection.s5 || showSection.s6 || showSection.s7 || showSection.s8 || showSection.s9 || showSection.s10 || showSection.s11 || showSection.s12 || showSection.s13 || showSection.s14)){
                     showSection.default = true;
                 } 
                 this.showSection = showSection;

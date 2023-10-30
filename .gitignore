@@ -104,3 +104,7 @@ dist
 .tern-port
 
 force-app/main/default
+force-app/test
+
+.sf/
+.sfdx/

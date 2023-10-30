@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>SF PEG Content Display</masterLabel>
+    <description>Simple CMS Content Display</description>
+    <targets>
+        <target>lightningCommunity__Default</target>  
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property   name="contentKey"
+                        label="Content Key"
+                        type="ContentReference"
+                        description="Key of the Content to display" />
+
+            <property   name="showTitle"
+                        label="Show Title?"
+                        type="Boolean"
+                        description="Flag to display Content Title" />
+            <property   name="titleClass"
+                        label="Title CSS"
+                        type="String"
+                        description="CSS to apply to Content Title" />
+
+            <property   name="excerptField"
+                        label="Excerpt Field"
+                        type="String"
+                        description="Name of Content Field containing textual Excerpt / Summary" />
+            <property   name="excerptClass"
+                        label="Title CSS"
+                        type="String"
+                        description="CSS to apply to Content Excerpt / Summary" />
+
+            <property   name="contentField"
+                        label="Content Field"
+                        type="String"
+                        description="Name of the Content Field containing richtext Body" />
+            <property   name="contentClass"
+                        label="Content CSS"
+                        type="String"
+                        description="CSS to apply to Content Field" />
+
+            <property   name="isDebug"
+                        label="Show Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to activate debug information." />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

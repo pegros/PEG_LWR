@@ -11,8 +11,8 @@ may be added, leveraging criteria on field values of the current record or User.
 
 ## Site Builder Configuration
 
-to be continued
+_to be continued_
 
-## Rechnical Details
+## Technical Details
 
-to be continued
+_to be continued_

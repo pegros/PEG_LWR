@@ -11,8 +11,8 @@ evaluated from page context using a variety of comparison operators.
 
 ## Site Builder Configuration
 
-to be continued
+_to be continued_
 
-## Rechnical Details
+## Technical Details
 
-to be continued
+_to be continued_

@@ -11,8 +11,8 @@ as a list of tabs or links.
 
 ## Site Builder Configuration
 
-to be continued
+_to be continued_
 
-## Rechnical Details
+## Technical Details
 
-to be continued
+_to be continued_

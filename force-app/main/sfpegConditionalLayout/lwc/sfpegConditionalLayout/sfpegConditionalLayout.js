@@ -2,7 +2,7 @@
 * @author P-E GROS
 * @date   Jan 2023
 * @description  LWC Component to provide conditional display sections in LWR Experience Sites
-* @see PEG_LIST package (https://github.com/pegros/PEG_MISC)
+* @see PEG_LWR package (https://github.com/pegros/PEG_LWR)
 *
 * Legal Notice
 * 

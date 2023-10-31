@@ -29,7 +29,7 @@
 * SOFTWARE.
 ***/
 
-import { LightningElement, api, wire } from 'lwc';
+import { LightningElement, api } from 'lwc';
 
 /**
  * @slot conditionSection

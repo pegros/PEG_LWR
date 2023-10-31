@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>SF PEG Conditional Section</masterLabel>
+    <description>Simple Conditional Layout based on SF PEG Merge expression</description>
+    <targets>
+        <target>lightningCommunity__Default</target>  
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property   name="forceDisplay"
+                        label="Force Complete Display?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to force the display of all sections (for Builder configuration)." />
+
+            <property   name="condition"
+                        label="Condition"
+                        type="String"
+                        description="Condition to evaluate leveraging the SF PEG Context Merge Syntax." />
+
+            <property   name="hasDefault"
+                        label="Show Default?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to activate default section when condition not met." />
+
+            <property   name="isDebug"
+                        label="Show Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to activate debug information." />
+
+            <property   name="objectApiName"
+                        label="Object Name"
+                        type="String"
+                        default="{!Route.objectApiName}"
+                        description="API Name of the current record for the SF PEG Merge context" />
+
+            <property   name="recordId"
+                        label="Record ID"
+                        type="String"
+                        default="{!Route.recordId}"
+                        description="Record ID of the current record for the SF PEG Merge context" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -39,6 +39,13 @@ evaluated from page context using a variety of comparison operators.
 
 ![Conditional Layout](/media/sfpegConditionalLayout.png)
 
+
+### [sfpegConditionalSectioCmp](/help/sfpegConditionalSectionCmp.md)
+This container component the ability to display a section based on a complex conditions
+evaluated by leveraging the **[sfpegMergeUtl](https://github.com/pegros/PEG_LIST/blob/master/help/sfpegMergeUtl.md)**
+of the **[PEG_LIST](https://github.com/pegros/PEG_LIST)** package.
+
+
 ### [sfpegNavigationMenuCmp](/help/sfpegNavigationMenuCmp.md)
 This component enables to display a navigation menu configured in a LWR Experience Site
 as a list of tabs or links.

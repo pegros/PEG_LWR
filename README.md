@@ -26,6 +26,10 @@ This package provides a set of Site Builder components listed hereafter.
 Detailed information about these components (behaviour, configuration guidelines,
 technical implementation principles) is available in their dedicated pages.
 
+### [sfpegCmsContentDisplayCmp](/help/sfpegCmsContentDisplayCmp.md)
+This container component provides the ability to display actual richtext of any CMS Content in any page of a site.
+
+
 ### [sfpegConditionalContainerCmp](/help/sfpegConditionalContainerCmp.md)
 This container component provides up to 10 conditionaly displayed zones in which other components
 may be added, leveraging criteria on field values of the current record or User.

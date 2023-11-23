@@ -1,6 +1,6 @@
 # ![Logo](/media/Logo.png) &nbsp; SFPEG Conditional Section
 
-⚠️ This page is still Work In Progress 🚧
+🚧 This page is still Work In Progress 🚧
 
 ## Introduction
 

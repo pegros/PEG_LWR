@@ -1,11 +1,10 @@
 # ![Logo](/media/Logo.png) &nbsp; SFPEG Conditional Container
 
-⚠️ This page is still Work In Progress 🚧
+🚧 This page is still Work In Progress 🚧
 
 ## Introduction
 
-This container component provides the ability to display actual richtext of any CMS
-Content in any page of a site.
+This container component provides the ability to display actual richtext of any CMS Content in any page of a site.
 
 ## Site Builder Configuration
 

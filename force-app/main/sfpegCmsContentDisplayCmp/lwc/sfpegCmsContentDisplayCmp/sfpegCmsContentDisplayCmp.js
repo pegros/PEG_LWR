@@ -32,6 +32,7 @@
 import { LightningElement,api,wire } from 'lwc';
 import { getContent } from "experience/cmsDeliveryApi";
 import siteId from "@salesforce/site/Id";
+import basePath from "@salesforce/community/basePath";
 
 export default class SfpegCmsContentDisplayCmp extends LightningElement {
 
@@ -74,7 +75,16 @@ export default class SfpegCmsContentDisplayCmp extends LightningElement {
             if (this.isDebug) console.log('wiredContent: title set to ',this.contentTitle);
             this.contentExcerpt = (result.data.contentBody)[this.excerptField];
             if (this.isDebug) console.log('wiredContent: excerpt set to ',this.contentExcerpt);
-            this.contentData = (result.data.contentBody)[this.contentField];
+
+            let contentData = (result.data.contentBody)[this.contentField];
+            // @TODO : START Remove after Summer24 fix
+            if (contentData) {
+                let prefix = `${basePath}/sfsites/c`;
+                let regEx = new RegExp(`(?:${prefix})?(/cms/)`, "g");
+                contentData = contentData.replace(regEx, prefix + "$1");
+            }
+            // @TODO : END Remove after Summer24 fix
+            this.contentData = contentData;
             if (this.isDebug) console.log('wiredContent: content set to ',this.contentData);
             if (this.isDebug) console.log('wiredContent: END OK');
         }

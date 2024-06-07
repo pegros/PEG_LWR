@@ -32,6 +32,7 @@
 
 import { LightningElement, api, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
+import userId from '@salesforce/user/Id';
 import getMenuItems from '@salesforce/apex/sfpegNavigationMenu_CTL.getMenuItems';
 
 
@@ -42,11 +43,18 @@ export default class SfpegNavigationMenuCmp extends NavigationMixin(LightningEle
     //----------------------------------------------------------------
     @api navLabel;              // Navigation menu master label
     @api displayMode = 'tabs';  // Navigation display mode (tabs, links)
+    @api titlePrefix = 'Open';  // prefix to navLabel for link titles
     @api currentTab;            // Current Tab label (when tabs mode is used)
     @api showHome = false;      // Flag to incude the home entry or not
     @api wrapperClass;          // CSS class for the wrapping container ('slds-align_absolute-center')
+    @api listClass;             // CSS for list if list display is selected
 
     @api isDebug = false;       // Flag to activate debug information
+
+    //-----------------------------------
+    // Contextual Parameters
+    //-----------------------------------
+    currentUserId = userId;    
 
     //----------------------------------------------------------------
     // Internal Initialization Parameters
@@ -63,6 +71,12 @@ export default class SfpegNavigationMenuCmp extends NavigationMixin(LightningEle
     get isHList() {
         return (this.displayMode === 'links');
     }
+    get isVList() {
+        return (this.displayMode === 'Vlist');
+    }
+    get isOList() {
+        return (this.displayMode === 'Olist');
+    }
     get menuItemsString() {
         return JSON.stringify(this.menuItems);
     }
@@ -74,33 +88,55 @@ export default class SfpegNavigationMenuCmp extends NavigationMixin(LightningEle
     connectedCallback() {
         if (this.isDebug) console.log('connected: START NavigationMenu ',this.navLabel);
         if (this.isDebug) console.log('connected: showHome? ',this.showHome);
+        if (this.isDebug) console.log('connected: displayMode ',this.displayMode);
+        if (this.isDebug) console.log('connected: titlePrefix provided ',this.titlePrefix);
+        if (this.isDebug) console.log('connected: listClass provided ',this.listClass);
+        if (this.isHList) {
+            this.listClass = this.listClass || 'slds-list_dotted';
+        }
+        else if (this.isOList) {
+            this.listClass = this.listClass || 'slds-list_ordered';
+        }
         if (this.isDebug) console.log('connected: END NavigationMenu');
     }
 
-    @wire(getMenuItems, { navLabel: '$navLabel', showHome: '$showHome' })
+    @wire(getMenuItems, { navLabel: '$navLabel', showHome: '$showHome', userId: '$currentUserId' })
     wiredMenu({ error, data }) {
         if (this.isDebug) console.log('wiredMenu: START for ',this.navLabel);
         if (data) {
-            if (this.isDebug) console.log('wiredMenu: data  received ', JSON.stringify(data));
+            if (this.isDebug) console.log('wiredMenu: data received ', JSON.stringify(data));
+
+            let menuItems = [];
+            data.forEach(item => {
+                if (this.isDebug) console.log('wiredMenu: processing menu item ',item);
+                let newItem = {... item};
+                newItem.labelOrig = item.label;
+                newItem.title = this.titlePrefix + ' ' + this.navLabel;
+
+                if (newItem.label?.includes('&')) {
+                    if (this.isDebug) console.log('wiredHeaderMenus: unescaping label');
+                    newItem.label = this.htmlDecode(newItem.label);
+                }
+                menuItems.push(newItem);
+            });
+            if (this.isDebug) console.log('wiredMenu: menuItems reworked',JSON.stringify(menuItems));
+
 
             if ((this.displayMode === 'tabs') && (this.currentTab)) {
                 if (this.isDebug) console.log('wiredMenu: looking for currentTab ',this.currentTab);
-                const defaultItem = data.find(item => item.label === this.currentTab);
+                const defaultItem = menuItems.find(item => item.label === this.currentTab);
                 if (defaultItem) {
-                    if (this.isDebug) console.log('wiredMenu: END / using data as menuItems');
-                    this.menuItems = data;
+                    if (this.isDebug) console.log('wiredMenu: END / using current menuItems');
                 }
                 else {
-                    let menuItems = [...data];
                     menuItems.push({id:"additional",label:this.currentTab});
-                    this.menuItems = menuItems;
-                    if (this.isDebug) console.log('wiredMenu: END / using data with additional currentTab ',this.menuItems);
+                    if (this.isDebug) console.log('wiredMenu: END / additional currentTab  added',JSON.stringify(menuItems));
                 }
             }
             else {
                 if (this.isDebug) console.log('wiredMenu: END / using data as menuItems');
-                this.menuItems = data;
             }
+            this.menuItems = menuItems;
             this.errorMessage = null;
         }
         else if (error) {
@@ -175,5 +211,17 @@ export default class SfpegNavigationMenuCmp extends NavigationMixin(LightningEle
 
         this[NavigationMixin.Navigate](pageRef);
         if (this.isDebug) console.log('handleLinkClick: END NavigationMenu / Navigation triggered');
+    }
+
+    //----------------------------------------------------------------
+    // Utilities
+    //----------------------------------------------------------------  
+
+    htmlDecode = function(input) {
+        if (this.isDebug) console.log('htmlDecode: START with ',input);
+        const doc = new DOMParser().parseFromString(input, "text/html");
+        let result = doc.documentElement.textContent;
+        if (this.isDebug) console.log('htmlDecode: END with ',result);
+        return result;
     }
 }

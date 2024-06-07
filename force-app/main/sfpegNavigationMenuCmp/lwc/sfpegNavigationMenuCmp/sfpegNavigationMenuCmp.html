@@ -20,10 +20,36 @@
             <ul class="slds-list_horizontal slds-has-dividers_left slds-listbox slds-listbox_horizontal">
                 <template for:each={menuItems} for:item="item">
                     <li key={item.label} class="slds-item">
-                        <a href="#" data-value={item.label} onclick={handleLinkClick}>{item.label}</a>
+                        <a href="#" data-value={item.label} tabindex="0" title={item.title} onclick={handleLinkClick}>{item.label}</a>
                     </li>
                 </template>
             </ul>
+        </nav>
+    </template>
+
+    <!-- Vertical Link List Display -->
+    <template if:true={isVList}>
+        <nav role="navigation" class={wrapperClass} title="Navigation">
+            <ul class={listClass} >
+                <template for:each={menuItems} for:item="item">
+                    <li key={item.label}>
+                        <a href="#" data-value={item.label} tabindex="0" title={item.title} onclick={handleLinkClick}>{item.label}</a>
+                    </li>
+                </template>
+            </ul>
+        </nav>
+    </template>
+
+    <!-- Vertical Link List Display -->
+    <template if:true={isOList}>
+        <nav role="navigation" class={wrapperClass} title="Navigation">
+            <ol class={listClass}>
+                <template for:each={menuItems} for:item="item">
+                    <li key={item.label}>
+                        <a href="#" data-value={item.label} tabindex="0" title={item.title} onclick={handleLinkClick}>{item.label}</a>
+                    </li>
+                </template>
+            </ol>
         </nav>
     </template>
 

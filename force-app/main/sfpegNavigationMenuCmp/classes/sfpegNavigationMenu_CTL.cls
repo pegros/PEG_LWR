@@ -46,43 +46,88 @@ public with sharing class sfpegNavigationMenu_CTL {
     *               in a navigation menu given its label displayed in the Site Builder.
     *               It assumes that the call is done from an Experience Site to retrieve
     *               its Network ID.
+    *               User ID is simply used to trigger a reevaluation of the menu when switching from guest to connected mode
+    *               (and bypass the cacheable setting) and nor actually used in the logic.
     * @param        navigationLabel Label of the Navigation Menu
-    * @param        includeHome     
+    * @param        includeHome     Boolean flag to include the Home tab
+    * @param        userId          User ID for which the navigation menu details should be requested.
     * @return       List<ConnectApi.NavigationMenuItem> List of supported menu items
     * @exception    Various exceptions in case of missing input or wrong context.
     ***/
 
     @AuraEnabled(cacheable=true)
-    public static List<ConnectApi.NavigationMenuItem> getMenuItems(String navLabel, Boolean showHome) {
+    public static List<ConnectApi.NavigationMenuItem> getMenuItems(String navLabel, Boolean showHome, final String userId) {
         System.debug('getMenuItems: START for ' + navLabel);
         System.debug('getMenuItems: with home? ' + showHome);
+        System.debug('getMenuItems: with userId ' + userId);
         if (String.isEmpty(navLabel)) {
             System.debug(LoggingLevel.ERROR, 'getMenuItems: END KO / Missing navigation Label');
             throw new System.AuraHandledException('Missing Navigation Menu Label!');
         }
 
-        String networkId = Network.getNetworkId();
+        String networkId;
+        if (!Test.isRunningTest()) {
+            networkId = Network.getNetworkId();
+        }
+        else {
+            System.debug('getMenuItems: setting networkId to userId for tests');
+            networkId = userId;
+        }
         if (String.isEmpty(networkId)) {
             System.debug(LoggingLevel.ERROR, 'getMenuItems: END KO / No networkId');
             throw new System.AuraHandledException('Network ID not available!');
         }
         System.debug('getMenuItems: networkId retrieved ' + networkId);
 
-        NavigationLinkSet navigationLinkSet = [ SELECT DeveloperName
-                                                FROM NavigationLinkSet
-                                                WHERE NetworkId = :networkId AND MasterLabel = :navLabel
-                                                LIMIT 1];
-        if (navigationLinkSet == null) {
+        NavigationLinkSet navigationLink = null;
+        if (!Test.isRunningTest()) {
+            navigationLink = [  SELECT DeveloperName
+                                FROM NavigationLinkSet
+                                WHERE NetworkId = :networkId AND MasterLabel = :navLabel
+                                LIMIT 1];
+        }
+        else {
+            System.debug(LoggingLevel.ERROR, 'getMenuItems: setting test navigation set');
+            if (navLabel != 'NONE') {
+                System.debug(LoggingLevel.FINEST, 'getMenuItems: registering menu ' + navLabel);
+                navigationLink = new NavigationLinkSet(DeveloperName = navLabel, MasterLabel = navLabel);
+            }
+            else {
+                System.debug(LoggingLevel.FINEST, 'getMenuItems: ignoring menu ' + navLabel);
+            }
+        }
+        if (navigationLink == null) {
             System.debug(LoggingLevel.ERROR, 'getMenuItems: END KO / No navigation found with label ' + navLabel + ' on network ' + networkId);
             throw new System.AuraHandledException('Navigation menu not found!');
         }
-        System.debug('getMenuItems: navigationLinkSet retrieved ' + navigationLinkSet);
-        String navName = navigationLinkSet.DeveloperName;
+        System.debug('getMenuItems: navigationLink retrieved ' + navigationLink);
+        String navName = navigationLink.DeveloperName;
+        System.debug('getMenuItems: navName extracted ' + navName);
 
-        ConnectApi.NavigationMenuItemCollection navMenu = ConnectApi.NavigationMenu.getCommunityNavigationMenu(
-            networkId, null, navName,
-            ConnectApi.PublishStatus.Live, false, showHome, EXCLUDED_TYPES);
-        System.debug('getMenuItems: navigation Menu retrieved ' + navMenu);
+        ConnectApi.NavigationMenuItemCollection navMenu;
+        if (!Test.isRunningTest()) {
+            navMenu = ConnectApi.NavigationMenu.getCommunityNavigationMenu(
+                networkId, null, navName,
+                ConnectApi.PublishStatus.Live, false, showHome, EXCLUDED_TYPES);
+            System.debug('getMenuItems: navigation Menu retrieved ' + navMenu);
+        }
+        else {
+            System.debug('getMenuItems: setting test navigation menu');
+            navMenu = new ConnectApi.NavigationMenuItemCollection();
+            navMenu.menuItems = new List<ConnectApi.NavigationMenuItem>();
+            ConnectApi.NavigationMenuItem newItem = new ConnectApi.NavigationMenuItem();
+            if (showHome) {
+                System.debug('getMenuItems: adding home option');
+                newItem.Label = 'Home';
+                newItem.actionValue = 'www.home.test';
+            }
+            else {
+                System.debug('getMenuItems: no home option');
+                newItem.Label = 'Other';
+                newItem.actionValue = 'www.other.test';
+            }
+            navMenu.menuItems.add(newItem);
+        }
 
         List<ConnectApi.NavigationMenuItem> navItems = navMenu.menuItems;
         System.debug('getMenuItems: END returning ' + navItems);

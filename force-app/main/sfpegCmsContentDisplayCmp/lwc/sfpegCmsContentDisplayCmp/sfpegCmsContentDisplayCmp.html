@@ -1,21 +1,49 @@
 <template>
     <!-- Base Content Display -->
-    <template lwc:if={contentTitle}>
-        <div class={titleClass}>
-            <lightning-formatted-text value={contentTitle}></lightning-formatted-text>
-        </div>
-    </template>
-    <template lwc:if={contentExcerpt}>
-        <div class={excerptClass}>
-            <lightning-formatted-text value={contentExcerpt}></lightning-formatted-text>
-        </div>
-    </template>
-    <template lwc:if={contentData}>
-        <div class={contentClass}>
-            <lightning-formatted-rich-text value={contentData} ></lightning-formatted-rich-text>
-        </div>
-    </template>
-    
+    <article>
+       
+        <template lwc:if={contentTitle}>
+            <template lwc:if={isH2}>
+                <h2 class={titleClass}>
+                    <lightning-formatted-text class={titleClass} value={contentTitle} linkify>
+                    </lightning-formatted-text>
+                </h2>
+            </template>
+            <template lwc:elseif={isH1}>
+                <h1 class={titleClass}>
+                    <lightning-formatted-text class={titleClass} value={contentTitle} linkify>
+                    </lightning-formatted-text>
+                </h1>
+            </template>
+            <template lwc:elseif={isH3}>
+                <h3 class={titleClass}>
+                    <lightning-formatted-text class={titleClass} value={contentTitle} linkify>
+                    </lightning-formatted-text>
+                </h3>
+            </template>
+            <template lwc:else>
+                <h4 class={titleClass}>
+                    <lightning-formatted-text class={titleClass} value={contentTitle} linkify>
+                    </lightning-formatted-text>
+                </h4>
+            </template>
+        </template>
+
+        <template lwc:if={contentExcerpt}>
+            <p class={excerptClass}>
+                <lightning-formatted-text class={excerptClass} value={contentExcerpt} linkify>
+                </lightning-formatted-text>
+            </p>
+        </template>
+
+        <template lwc:if={contentData}>
+            <p class={excerptClass}>
+                <lightning-formatted-rich-text class={excerptClass} value={contentData} >
+                </lightning-formatted-rich-text>
+            </p>
+        </template>
+    </article>
+
     <!-- Help Display -->
     <template if:true={isDebug}>
         <div class="slds-box slds-box_small slds-theme_default slds-m-top_x-small"  >

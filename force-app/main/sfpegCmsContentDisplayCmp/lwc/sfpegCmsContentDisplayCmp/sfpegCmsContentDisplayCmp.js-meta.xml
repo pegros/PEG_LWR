@@ -19,6 +19,11 @@
                         label="Show Title?"
                         type="Boolean"
                         description="Flag to display Content Title" />
+            <property   name="titleLevel"
+                        label="Title Level?"
+                        type="String"
+                        datasource="h1,h2,h3,h4"
+                        description="Level of the HTML tag used to display the title" />
             <property   name="titleClass"
                         label="Title CSS"
                         type="String"
@@ -29,7 +34,7 @@
                         type="String"
                         description="Name of Content Field containing textual Excerpt / Summary" />
             <property   name="excerptClass"
-                        label="Title CSS"
+                        label="Excerpt CSS"
                         type="String"
                         description="CSS to apply to Content Excerpt / Summary" />
 

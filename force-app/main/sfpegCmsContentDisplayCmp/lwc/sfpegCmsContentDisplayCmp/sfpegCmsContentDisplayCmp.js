@@ -42,6 +42,7 @@ export default class SfpegCmsContentDisplayCmp extends LightningElement {
     @api contentKey;                // ID Key of the CMS content
 
     @api showTitle;                 // Flag to display Content Title
+    @api titleLevel = 'h2';         // Content Title Level (h1, h2...)
     @api titleClass;                // CSS to apply to Content Title
 
     @api excerptField = 'excerpt';  // Content Field containing textual Excerpt / Summary
@@ -60,30 +61,85 @@ export default class SfpegCmsContentDisplayCmp extends LightningElement {
     contentData;        // Actual content body fetched from server
 
     //----------------------------------------------------------------
+    // Custom Getters
+    //----------------------------------------------------------------
+    get isH1() {
+        //if (this.isDebug) console.log('isH1: ',this.titleLevel === 'h1');
+        return this.titleLevel === 'h1';
+    }
+    get isH2() {
+        //if (this.isDebug) console.log('isH2: ',this.titleLevel === 'h2');
+        return this.titleLevel === 'h2';
+    }
+    get isH3() {
+        //if (this.isDebug) console.log('isH3: ',this.titleLevel === 'h3');
+        return this.titleLevel === 'h3';
+    }
+
+    //----------------------------------------------------------------
     // Internal technical properties (for Site Builder)
     //----------------------------------------------------------------
     @wire(getContent, { channelOrSiteId: siteId, contentKeyOrId: "$contentKey" })
     wiredContent(result) {
         if (this.isDebug) console.log('wiredContent: START with key ',this.contentKey);
-        if (this.isDebug) console.log('wiredContent: and field ',this.showTitle);
-        if (this.isDebug) console.log('wiredContent: and field ',this.excerptField);
-        if (this.isDebug) console.log('wiredContent: and field ',this.contentField);
+        if (this.isDebug) console.log('wiredContent: and title? ',this.showTitle);
+        if (this.isDebug) console.log('wiredContent: and title level ',this.titleLevel);
+        if (this.isDebug) console.log('wiredContent: and exceprt field ',this.excerptField);
+        if (this.isDebug) console.log('wiredContent: and content field ',this.contentField);
         if (this.isDebug) console.log('wiredContent: data received ',JSON.stringify(result));
         if (result?.data) {
             if (this.isDebug) console.log('wiredContent: analysing content data');
             this.contentTitle = (this.showTitle ? result.data.title : null);
             if (this.isDebug) console.log('wiredContent: title set to ',this.contentTitle);
-            this.contentExcerpt = (result.data.contentBody)[this.excerptField];
+
+            let excerptData = (result.data.contentBody)[this.excerptField];
+            // @TODO : START Remove after Summer24 fix
+            if (excerptData) {
+                let prefix = `${basePath}/sfsites/c`;
+                let regEx = new RegExp(`(?:${prefix})?(/cms/)`, "g");
+                excerptData = excerptData.replace(regEx, prefix + "$1");
+            }
+            // @TODO : END Remove after Summer24 fix
+            this.contentExcerpt = excerptData;
             if (this.isDebug) console.log('wiredContent: excerpt set to ',this.contentExcerpt);
 
             let contentData = (result.data.contentBody)[this.contentField];
-            // @TODO : START Remove after Summer24 fix
             if (contentData) {
+                // @TODO : START Remove after Summer24 fix
                 let prefix = `${basePath}/sfsites/c`;
                 let regEx = new RegExp(`(?:${prefix})?(/cms/)`, "g");
                 contentData = contentData.replace(regEx, prefix + "$1");
+                if (this.isDebug) console.log('wiredContent: urls reworked ',contentData);
+                // @TODO : END Remove after Summer24 fix
+                
+                // replace div by p
+                let divRegEx = new RegExp(`<div([^>]*)>`, "g");
+                contentData = contentData.replace(divRegEx, '<p ' + "$1" + '>');
+                if (this.isDebug) console.log('wiredContent: new div start replaced ',contentData);
+                contentData = contentData.replaceAll('</div>','</p>');
+                if (this.isDebug) console.log('wiredContent: div end replaced ',contentData);
+                // replace <<< and >>> HTML escaped text by < and >
+                contentData = contentData.replaceAll('&gt;&gt;&gt;','>');
+                contentData = contentData.replaceAll('&lt;&lt;&lt;','<');
+                if (this.isDebug) console.log('wiredContent: < and > replaced ',contentData);
+                
+                // replace xxxx="yyy" HTML escaped text
+                let propertyRegEx = new RegExp(`(\S*)&#61;&#34;(.*)&#34;`,"g");
+                contentData = contentData.replace(propertyRegEx, "$1" + '="' + "$2" + '"');
+                if (this.isDebug) console.log('wiredContent: properties replaced ',contentData);
+
+                /*
+                // replace abbr text by proper abbr elt
+                contentData = contentData.replaceAll('&lt;abbr&gt;','<abbr>');
+                contentData = contentData.replaceAll('&lt;/abbr&gt;','</abbr>');
+                if (this.isDebug) console.log('wiredContent: abbrs replaced ',contentData);
+                // replace span text by proper span elt
+                let spanRegEx = new RegExp(`&lt;span([^>]*)&gt;`, "g");
+                contentData = contentData.replace(spanRegEx, '<span' + "$1" + '>');
+                contentData = contentData.replaceAll('&lt;/span&gt;','</span>');
+                if (this.isDebug) console.log('wiredContent: spans replaced ',contentData);
+                */
             }
-            // @TODO : END Remove after Summer24 fix
             this.contentData = contentData;
             if (this.isDebug) console.log('wiredContent: content set to ',this.contentData);
             if (this.isDebug) console.log('wiredContent: END OK');

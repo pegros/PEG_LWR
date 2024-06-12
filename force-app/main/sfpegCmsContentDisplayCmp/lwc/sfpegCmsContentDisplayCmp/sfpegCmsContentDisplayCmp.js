@@ -51,6 +51,7 @@ export default class SfpegCmsContentDisplayCmp extends LightningElement {
     @api contentField = 'body';     // Content Field containing richtext Body
     @api contentClass;              // CSS to apply to Content richtext Body
 
+    @api linkTitle;                 // Link default title (e.g. to indicate that a new page is opened for accessibility)
     @api isDebug;                   // Debug activation flag
 
     //----------------------------------------------------------------
@@ -114,7 +115,7 @@ export default class SfpegCmsContentDisplayCmp extends LightningElement {
                 
                 // replace div by p
                 let divRegEx = new RegExp(`<div([^>]*)>`, "g");
-                contentData = contentData.replace(divRegEx, '<p ' + "$1" + '>');
+                contentData = contentData.replace(divRegEx, '<p' + "$1" + '>');
                 if (this.isDebug) console.log('wiredContent: new div start replaced ',contentData);
                 contentData = contentData.replaceAll('</div>','</p>');
                 if (this.isDebug) console.log('wiredContent: div end replaced ',contentData);
@@ -124,10 +125,19 @@ export default class SfpegCmsContentDisplayCmp extends LightningElement {
                 if (this.isDebug) console.log('wiredContent: < and > replaced ',contentData);
                 
                 // replace xxxx="yyy" HTML escaped text
-                let propertyRegEx = new RegExp(`(\S*)&#61;&#34;(.*)&#34;`,"g");
+                let propertyRegEx = new RegExp(`(\S*)&#61;&#34;(\S*)&#34;`,"g");
+                if (this.isDebug) console.log('wiredContent: property matches ',contentData);
                 contentData = contentData.replace(propertyRegEx, "$1" + '="' + "$2" + '"');
                 if (this.isDebug) console.log('wiredContent: properties replaced ',contentData);
 
+                if (this.linkTitle) {
+                    //let linkRegEx = new RegExp(`<a target="(\S+)"(.*) href="(\S+)">`,"g");
+                    let linkRegEx = new RegExp(`<a `,"g");
+                    if (this.isDebug) console.log('wiredContent: link titles found ',contentData.match(linkRegEx));
+                    //contentData = contentData.replace(linkRegEx, '<a target="' + "$1" + '"' + "$2" + ' href="' + "$3" + '" title="' + this.linkPrefix + "$3" +'">');
+                    contentData = contentData.replace(linkRegEx, '<a ' + ' title="' + this.linkTitle +'" ');
+                    if (this.isDebug) console.log('wiredContent: link titles added ',contentData);
+                }
                 /*
                 // replace abbr text by proper abbr elt
                 contentData = contentData.replaceAll('&lt;abbr&gt;','<abbr>');
@@ -150,7 +160,7 @@ export default class SfpegCmsContentDisplayCmp extends LightningElement {
     }
 
     //----------------------------------------------------------------
-    // Internal technical properties (for Site Builder)
+    // Component Initialization
     //----------------------------------------------------------------
     connnectedCallback() {
         if (this.isDebug) console.log('connected: START with key ',this.contentKey);

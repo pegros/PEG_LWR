@@ -30,17 +30,17 @@
         </template>
 
         <template lwc:if={contentExcerpt}>
-            <p class={excerptClass}>
+            <section class={excerptClass}>
                 <lightning-formatted-text class={excerptClass} value={contentExcerpt} linkify>
                 </lightning-formatted-text>
-            </p>
+            </section>
         </template>
 
         <template lwc:if={contentData}>
-            <p class={excerptClass}>
+            <section class={excerptClass}>
                 <lightning-formatted-rich-text class={excerptClass} value={contentData} >
                 </lightning-formatted-rich-text>
-            </p>
+            </section>
         </template>
     </article>
 

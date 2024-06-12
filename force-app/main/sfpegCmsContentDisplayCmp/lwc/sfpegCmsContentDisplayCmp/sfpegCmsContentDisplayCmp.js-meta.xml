@@ -47,6 +47,11 @@
                         type="String"
                         description="CSS to apply to Content Field" />
 
+            <property   name="linkTitle"
+                        label="Link Title"
+                        type="String"
+                        description="Default title added to all links included in the content (for accessibility)" />
+
             <property   name="isDebug"
                         label="Show Debug?"
                         type="Boolean"

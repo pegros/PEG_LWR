@@ -1,10 +1,12 @@
 # ![Logo](/media/Logo.png) &nbsp; SFPEG Content  Display
 
-🚧 This page is still Work In Progress 🚧
-
 ## Introduction
 
-This container component provides the ability to display actual richtext of any CMS Content in any page of a site.
+This container component provides the ability to display actual richtext of any CMS Content
+in any page of a site (i.e. not only in the record pages corresponding to their CMS type).
+
+As an example, it enables to include CMS managed content as header of an object list page
+or display 2 or let a few sections of a standard page be managed via CMS.
 
 
 ## Site Builder Configuration

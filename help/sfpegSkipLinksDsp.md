@@ -23,8 +23,8 @@ application (both in edit / preview modes) in which case they appear systematica
 
 The **sfpegSkipLinksDsp** should be positionned as the first component of the page header.
 
-It has no real property controlling its behaviour but only styling options (via CSS classes)
-for all its HTML child elements, i.e.:
+It has no property to control its behaviour but only provides the styling all its HTML child
+elements via CSS classes in the following properties:
 * `div CSS` for the wrapping _div_
 * `nav CSS` for the main _nav_
 * `ul CSS` for the link _ul_ list
@@ -35,8 +35,11 @@ A few other properties enable to further tune the component:
 * `nav Label` to set the _aria-label_ of the _nav_ element.
 * `Show Debug?` to activate debug mode on the component.
 
+
 Default values are provided leveraging the **[SLDS](https://www.lightningdesignsystem.com/)**
 design system.
+
+#### **DSFR** Styling
 
 For **[DSFR](https://www.systeme-de-design.gouv.fr/)** design system compliance,
 the following values should be used instead:

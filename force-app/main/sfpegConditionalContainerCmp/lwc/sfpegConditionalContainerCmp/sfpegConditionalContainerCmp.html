@@ -1,68 +1,68 @@
 <template>
     <!-- Main Component Display -->
-    <section if:true={showSection.s1} class={wrappingClass}>
-        <p if:true={forceDisplay} class="debugInfo">Section #1 - {sourceField} = {list1}</p>
+    <section lwc:if={showSection.s1} class={wrappingClass}>
+        <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">Section #1 - {sourceField} = {list1}</p>
         <slot name="section1"></slot>
     </section>
-    <section if:true={showSection.s2} class={wrappingClass}>
-        <p if:true={forceDisplay} class="debugInfo">Section #2 - {sourceField} = {list2}</p>
+    <section lwc:if={showSection.s2} class={wrappingClass}>
+        <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">Section #2 - {sourceField} = {list2}</p>
         <slot name="section2"></slot>
     </section>
-    <section if:true={showSection.s3} class={wrappingClass}>
-        <p if:true={forceDisplay} class="debugInfo">Section #3 - {sourceField} = {list3}</p>
+    <section lwc:if={showSection.s3} class={wrappingClass}>
+        <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">Section #3 - {sourceField} = {list3}</p>
         <slot name="section3"></slot>
     </section>
-    <section if:true={showSection.s4} class={wrappingClass}>
-        <p if:true={forceDisplay} class="debugInfo">Section #4 - {sourceField} = {list4}</p>
+    <section lwc:if={showSection.s4} class={wrappingClass}>
+        <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">Section #4 - {sourceField} = {list4}</p>
         <slot name="section4"></slot>
     </section>
-    <section if:true={showSection.s5} class={wrappingClass}>
-        <p if:true={forceDisplay} class="debugInfo">Section #5 - {sourceField} = {list5}</p>
+    <section lwc:if={showSection.s5} class={wrappingClass}>
+        <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">Section #5 - {sourceField} = {list5}</p>
         <slot name="section5"></slot>
     </section>
-    <section if:true={showSection.s6} class={wrappingClass}>
-        <p if:true={forceDisplay} class="debugInfo">Section #6 - {sourceField} = {list6}</p>
+    <section lwc:if={showSection.s6} class={wrappingClass}>
+        <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">Section #6 - {sourceField} = {list6}</p>
         <slot name="section6"></slot>
     </section>
-    <section if:true={showSection.s7} class={wrappingClass}>
-        <p if:true={forceDisplay} class="debugInfo">Section #7 - {sourceField} = {list7}</p>
+    <section lwc:if={showSection.s7} class={wrappingClass}>
+        <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">Section #7 - {sourceField} = {list7}</p>
         <slot name="section7"></slot>
     </section>
-    <section if:true={showSection.s8} class={wrappingClass}>
-        <p if:true={forceDisplay} class="debugInfo">Section #8 - {sourceField} = {list8}</p>
+    <section lwc:if={showSection.s8} class={wrappingClass}>
+        <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">Section #8 - {sourceField} = {list8}</p>
         <slot name="section8"></slot>
     </section>
-    <section if:true={showSection.s9} class={wrappingClass}>
-        <p if:true={forceDisplay} class="debugInfo">Section #9 - {sourceField} = {list9}</p>
+    <section lwc:if={showSection.s9} class={wrappingClass}>
+        <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">Section #9 - {sourceField} = {list9}</p>
         <slot name="section9"></slot>
     </section>
-    <section if:true={showSection.s10} class={wrappingClass}>
-        <p if:true={forceDisplay} class="debugInfo">Section #10 - {sourceField} = {list10}</p>
+    <section lwc:if={showSection.s10} class={wrappingClass}>
+        <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">Section #10 - {sourceField} = {list10}</p>
         <slot name="section10"></slot>
     </section>
-    <section if:true={showSection.s11} class={wrappingClass}>
-        <p if:true={forceDisplay} class="debugInfo">Section #11 - {sourceField} = {list11}</p>
+    <section lwc:if={showSection.s11} class={wrappingClass}>
+        <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">Section #11 - {sourceField} = {list11}</p>
         <slot name="section11"></slot>
     </section>
-    <section if:true={showSection.s12} class={wrappingClass}>
-        <p if:true={forceDisplay} class="debugInfo">Section #12 - {sourceField} = {list12}</p>
+    <section lwc:if={showSection.s12} class={wrappingClass}>
+        <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">Section #12 - {sourceField} = {list12}</p>
         <slot name="section12"></slot>
     </section>
-    <section if:true={showSection.s13} class={wrappingClass}>
-        <p if:true={forceDisplay} class="debugInfo">Section #13 - {sourceField} = {list13}</p>
+    <section lwc:if={showSection.s13} class={wrappingClass}>
+        <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">Section #13 - {sourceField} = {list13}</p>
         <slot name="section13"></slot>
     </section>
-    <section if:true={showSection.s14} class={wrappingClass}>
-        <p if:true={forceDisplay} class="debugInfo">Section #14 - {sourceField} = {list14}</p>
+    <section lwc:if={showSection.s14} class={wrappingClass}>
+        <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">Section #14 - {sourceField} = {list14}</p>
         <slot name="section14"></slot>
     </section>
-    <section if:true={showSection.default} class={wrappingClass}>
-        <p if:true={forceDisplay} class="debugInfo">Default Section</p>
+    <section lwc:if={showSection.default} class={wrappingClass}>
+        <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">Default Section</p>
         <slot name="defaultSection"></slot>
     </section>
 
     <!-- Error Display -->
-    <div if:true={errorMessage} class="slds-box slds-box_small slds-theme_default slds-media slds-media_center">
+    <div lwc:if={errorMessage} class="slds-box slds-box_small slds-theme_default slds-media slds-media_center">
         <div class="slds-media__figure">
             <lightning-icon icon-name="utility:error"   size="x-small"    variant="error">
             </lightning-icon>
@@ -74,7 +74,7 @@
     </div>
 
     <!-- Debug Information Display -->
-    <template if:true={isDebug}>
+    <template lwc:if={isDebug}>
         <div class="slds-box slds-box_small slds-theme_default slds-m-top_x-small"  >
             <dl class="slds-dl_horizontal">
                 <dt class="slds-dl_horizontal__label slds-truncate">Context:</dt>

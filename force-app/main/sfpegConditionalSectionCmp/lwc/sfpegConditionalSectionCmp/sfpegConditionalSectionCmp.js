@@ -32,6 +32,7 @@
 ***/
 
 import { LightningElement, api, wire } from 'lwc';
+import { CurrentPageReference } from 'lightning/navigation';
 import currentUserId from '@salesforce/user/Id';
 import { getRecord } from 'lightning/uiRecordApi';
 import sfpegMergeUtl from 'c/sfpegMergeUtl';
@@ -66,6 +67,7 @@ export default class SfpegConditionalSectionCmp extends LightningElement {
     userData;
     recordFields;
     recordData;
+    isSiteBuilder = false;
 
     //----------------------------------------------------------------
     // Custom Getters
@@ -76,11 +78,26 @@ export default class SfpegConditionalSectionCmp extends LightningElement {
     get showDefault() {
         return ((!this.showCondition || this.forceDisplay) && this.hasDefault);
     }
-    
+    get showSectionTitle() {
+        return (this.isSiteBuilder || this.forceDisplay);
+    }
 
     //----------------------------------------------------------------
     // Context Fetch
     //----------------------------------------------------------------
+
+    // Current page Data 
+    @wire(CurrentPageReference)
+    wiredPage(data){
+        if (this.isDebug) console.log('wiredPage: START conditional section for ',this.condition);
+        if (this.isDebug) console.log('wiredPage: with page ',JSON.stringify(data));
+
+        let app = data && data.state && data.state.app;
+        if (this.isDebug) console.log('wiredPage: app extracted ',app);
+        this.isSiteBuilder = (app === 'commeditor');
+
+        if (this.isDebug) console.log('wiredPage: END conditional section with isSiteBuilder',this.isSiteBuilder);
+    };
 
     // Current Record Data 
     @wire(getRecord, { "recordId": '$recordId', "fields": '$recordFields' })

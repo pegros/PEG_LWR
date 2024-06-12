@@ -29,7 +29,8 @@
 * SOFTWARE.
 ***/
 
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, wire } from 'lwc';
+import { CurrentPageReference } from 'lightning/navigation';
 
 /**
  * @slot conditionSection
@@ -78,13 +79,39 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
     // Internal Parameters
     //----------------------------------------------------------------
     showCondition = false;
-    
+    isSiteBuilder = false;
+
     //----------------------------------------------------------------
     // Custom Getters
     //----------------------------------------------------------------
     get showDefault() {
         return ((!this.showCondition || this.forceDisplay) && this.hasDefault);
     }
+
+    get showSectionTitle() {
+        return (this.isSiteBuilder || this.forceDisplay);
+    }
+
+    get condition() {
+        return '"' + this.currentValue + '" ' + this.operator + ' "' + this.targetValue + '"';
+    }
+
+    //----------------------------------------------------------------
+    // Context Fetch
+    //----------------------------------------------------------------
+
+    // Current page Data 
+    @wire(CurrentPageReference)
+    wiredPage(data){
+        if (this.isDebug) console.log('wiredPage: START conditional layout for ',this.condition);
+        if (this.isDebug) console.log('wiredPage: with page ',JSON.stringify(data));
+
+        let app = data && data.state && data.state.app;
+        if (this.isDebug) console.log('wiredPage: app extracted ',app);
+        this.isSiteBuilder = (app === 'commeditor');
+
+        if (this.isDebug) console.log('wiredPage: END conditional layout with isSiteBuilder',this.isSiteBuilder);
+    };
 
     //----------------------------------------------------------------
     // Component Initialisation

@@ -30,6 +30,7 @@
 ***/
 
 import { LightningElement, api, wire } from 'lwc';
+import { CurrentPageReference } from 'lightning/navigation';
 import { getRecord } from 'lightning/uiRecordApi';
 import currentUserId from '@salesforce/user/Id';
 
@@ -90,13 +91,31 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
     showSection = {};
     field2fetch;        
     errorMessage;               // Initialisation Error Message
+    isSiteBuilder = false;
 
     //----------------------------------------------------------------
     // Custom Getters
     //----------------------------------------------------------------
-    /*get containerClass() {
-        return (this.forceDisplay ? 'slds-p-around_xx-small' :'');
-    }*/
+    get showSectionTitle() {
+        return (this.isSiteBuilder || this.forceDisplay);
+    }
+
+    //----------------------------------------------------------------
+    // Context Fetch
+    //----------------------------------------------------------------
+
+    // Current page Data 
+    @wire(CurrentPageReference)
+    wiredPage(data){
+        if (this.isDebug) console.log('wiredPage: START conditional container for ',this.sourceField);
+        if (this.isDebug) console.log('wiredPage: with page ',JSON.stringify(data));
+
+        let app = data && data.state && data.state.app;
+        if (this.isDebug) console.log('wiredPage: app extracted ',app);
+        this.isSiteBuilder = (app === 'commeditor');
+
+        if (this.isDebug) console.log('wiredPage: END conditional container with isSiteBuilder',this.isSiteBuilder);
+    };
 
     //----------------------------------------------------------------
     // Component Initialisation

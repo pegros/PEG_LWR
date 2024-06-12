@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>SF PEG Anchor</masterLabel>
+    <description>Anchor for the SkipLinks</description>
+    <targets>
+        <target>lightningCommunity__Default</target>  
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property   name="linkName"
+                        label="Name"
+                        type="String"
+                        description="Name of the anchor (as #name)" />
+            <property   name="linkLabel"
+                        label="Label"
+                        type="String"
+                        description="Label of the anchor" />
+            <property   name="sendEvent"
+                        label="Send Event?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to trigger page anchor update event upon component disconnect." />
+            <property   name="isDebug"
+                        label="Show Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to activate debug information." />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

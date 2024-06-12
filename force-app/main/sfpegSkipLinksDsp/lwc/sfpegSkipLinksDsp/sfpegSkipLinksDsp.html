@@ -1,0 +1,28 @@
+<template>
+    <!--<div class="fr-skiplinks">    slds-theme_shade skipLinks-->
+    <div class={divClass}>
+        <!--  <nav lwc:ref="fr-container" role="navigation" aria-label="Accès rapide" > -->
+        <nav class={navClass} role="navigation" aria-label={navLabel}>
+            <!-- class="fr-skiplinks__list" slds-list_horizontal slds-has-dividers_left slds-has-block-links -->
+            <ul class={ulClass}  >
+                <template for:each={skipLinks} for:item="iterL">
+                    <!--  class="slds-item" -->
+                    <li key={iterL.name} class={liClass}>
+                        <!-- class="fr-link" -->
+                        <a class={aClass} href={iterL.link} title={iterL.label} target="_self" >
+                            {iterL.label}
+                        </a>
+                    </li>
+                </template> 
+                <template if:true={isDebug}>
+                    <li class={liClass}>
+                        <a  class={aClass}  title="See Help on GitHub" target="_blank"
+                            href="https://github.com/pegros/PEG_LWR/blob/master/help/sfpegSkipLinksDsp.md">
+                            ⚠️ Debug active
+                        </a>
+                    </li>
+                </template>
+            </ul>
+        </nav>
+    </div>
+</template>

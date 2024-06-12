@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>SF PEG SkipLinks</masterLabel>
+    <description>List of anchors within the page</description>
+    <targets>
+        <target>lightningCommunity__Default</target>  
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property   name="divClass"
+                        label="div CSS"
+                        type="String"
+                        default="slds-theme_shade sfpegSkipLinks"
+                        description="CSS classes for the wrapping div" />
+            <property   name="navClass"
+                        label="nav CSS"
+                        type="String"
+                        description="CSS classes for the nav container" />
+            <property   name="navLabel"
+                        label="nav Label"
+                        type="String"
+                        default="Skip Links"
+                        description="Aria Label for the nav container" />
+            <property   name="ulClass"
+                        label="ul CSS"
+                        type="String"
+                        default="slds-list_horizontal slds-has-dividers_left slds-has-block-links"
+                        description="CSS classes for the ul list" />
+            <property   name="liClass"
+                        label="li CSS"
+                        type="String"
+                        default="slds-item"
+                        description="CSS classes for the individual li items" />
+            <property   name="aClass"
+                        label="a CSS"
+                        type="String"
+                        description="CSS classes for the individual links" />          
+                        
+            <property   name="isDebug"
+                        label="Show Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to activate debug information." />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

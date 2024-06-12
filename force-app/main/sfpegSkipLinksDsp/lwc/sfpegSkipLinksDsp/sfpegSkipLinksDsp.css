@@ -1,0 +1,14 @@
+.sfpegSkipLinks {
+    position: absolute;
+    top: 0;
+    padding: 1rem 0;
+    transform: translateY(-100%);
+    opacity: 0;
+    /*background-color: var(--background-contrast-grey);*/
+  }
+  
+  .sfpegSkipLinks:focus-within {
+    position: relative;
+    transform: translateY(0);
+    opacity: 1;
+  }

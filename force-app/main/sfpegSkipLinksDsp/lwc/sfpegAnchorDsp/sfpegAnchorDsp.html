@@ -1,0 +1,18 @@
+<template>
+    <div id={linkName} class={anchorClass} lwc:ref="linkDiv">
+        <template lwc:if={showAnchor}>
+            <p class="slds-text-heading_small slds-m-around_none">⚓️ #{linkName} ⚓️ {linkLabel} ⚓️
+                <template lwc:if={sendEvent}>
+                    <span class="slds-m-left_small">🔔</span>
+                </template>
+                <template lwc:if={isDebug}>
+                    <lightning-formatted-url    value="https://github.com/pegros/PEG_LWR/blob/master/help/sfpegSkipLinksDsp.md"
+                                                label="See Help on GitHub"
+                                                class="slds-m-left_small slds-text-body_small"
+                                                target="_blank">
+                    </lightning-formatted-url>
+                </template>
+            </p>
+        </template>
+    </div>
+</template>

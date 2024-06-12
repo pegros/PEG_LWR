@@ -57,6 +57,13 @@ as a list of tabs or links.
 ![Navigation Menu](/media/sfpegNavigationMenuCmp.png)
 
 
+### [sfpegSkipLinksDsp](/help/sfpegSkipLinksDsp.md)
+This component enables to display a skip link section at the top of a LWR Experience Site
+page for accessibility reasons.
+
+![Skip Links](/media/sfpegSkipLinksDsp.png)
+
+
 ## Technical Details
 
 The following links may be used to deploy the components more easily.

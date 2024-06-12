@@ -2,7 +2,7 @@
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>58.0</apiVersion>
     <isExposed>true</isExposed>
-    <masterLabel>SF PEG Conditional Section</masterLabel>
+    <masterLabel>SF PEG Conditional Container (Boolean SF PEG Merge)</masterLabel>
     <description>Simple Conditional Layout based on SF PEG Merge expression</description>
     <targets>
         <target>lightningCommunity__Default</target>  

@@ -1,4 +1,4 @@
-# ![Logo](/media/Logo.png) &nbsp; SFPEG Conditional Layout
+# ![Logo](/media/Logo.png) &nbsp; SF PEG Conditional Container (Boolean)
 
 🚧 This page is still Work In Progress 🚧
 

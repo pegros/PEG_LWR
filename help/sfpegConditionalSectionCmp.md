@@ -1,4 +1,4 @@
-# ![Logo](/media/Logo.png) &nbsp; SFPEG Conditional Section
+# ![Logo](/media/Logo.png) &nbsp; SF PEG Conditional Container (Boolean SF PEG Merge)
 
 🚧 This page is still Work In Progress 🚧
 

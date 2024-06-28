@@ -58,7 +58,8 @@ export default class SfpegAnchorDsp extends LightningElement {
     }
 
     get anchorClass() {
-        return (this.showAnchor ? 'slds-box slds-box_x-small slds-m-around_xx-small slds-theme_shade slds-theme_alert-texture' : 'slds-hide');
+        //return (this.showAnchor ? 'slds-box slds-box_x-small slds-m-around_xx-small slds-theme_shade slds-theme_alert-texture' : 'slds-hide');
+        return (this.showAnchor ? 'slds-box slds-box_x-small slds-m-around_xx-small slds-theme_shade slds-theme_alert-texture' : '');
     }
 
     //----------------------------------------------------------------

@@ -9,14 +9,14 @@
                     <!--  class="slds-item" -->
                     <li key={iterL.name} class={liClass}>
                         <!-- class="fr-link" -->
-                        <a class={aClass} href={iterL.link} title={iterL.label} target="_self" >
+                        <a class={aClass} href={iterL.link} aria-label={iterL.label} target="_self" >
                             {iterL.label}
                         </a>
                     </li>
                 </template> 
                 <template if:true={isDebug}>
                     <li class={liClass}>
-                        <a  class={aClass}  title="See Help on GitHub" target="_blank"
+                        <a  class={aClass}  aria-label="See Help on GitHub" title="See Help on GitHub" target="_blank"
                             href="https://github.com/pegros/PEG_LWR/blob/master/help/sfpegSkipLinksDsp.md">
                             ⚠️ Debug active
                         </a>

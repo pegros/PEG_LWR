@@ -1,5 +1,6 @@
 <template>
     <!-- Main Component Display -->
+    <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">SF PEG Conditional Container (Boolean SF PEG Merge)</p>
     <template lwc:if={showCondition}>
         <section>
             <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture"> IF {condition} ==> {showCondition}</p>

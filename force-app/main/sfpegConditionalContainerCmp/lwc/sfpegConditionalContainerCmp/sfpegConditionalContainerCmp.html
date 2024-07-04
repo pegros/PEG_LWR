@@ -1,6 +1,9 @@
 <template>
     <!-- Main Component Display -->
-    <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">SF PEG Conditional Container (Multi-Value)</p>
+    <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">SF PEG Conditional Container (Multi-Value)
+        <span lwc:if={forceDisplay}> ⚠️ FULL DISPLAY </span>
+        <span lwc:if={isDebug}> 🚧 DEBUG </span>
+    </p>
     <section lwc:if={showSection.s1} class={wrappingClass}>
         <p lwc:if={showSectionTitle} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">Section #1 - {sourceField} = {list1}</p>
         <slot name="section1"></slot>

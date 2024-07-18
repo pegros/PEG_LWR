@@ -64,6 +64,12 @@ page for accessibility reasons.
 ![Skip Links](/media/sfpegSkipLinksDsp.png)
 
 
+### [sfpegRecordDataUtl](/help/sfpegRecordDataUtl.md)
+This technical component enables to optimise page rendering performances,
+especially when using conditional display to load record data right from
+the initial rendering of a site record page.
+
+
 ## Technical Details
 
 The following links may be used to deploy the components more easily.

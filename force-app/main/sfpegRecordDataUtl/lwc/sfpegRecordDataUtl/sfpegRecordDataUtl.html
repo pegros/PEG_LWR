@@ -1,0 +1,23 @@
+<template>
+    <p lwc:if={isSiteBuilder} class="slds-text-heading_small slds-p-around_small slds-theme_shade slds-theme_alert-texture">SF PEG Record data Loader
+        <span lwc:if={isDebug}> 🚧 DEBUG </span>
+    </p>
+    <!-- Debug Information Display -->
+    <template lwc:if={isDebug}>
+        <div class="slds-box slds-box_small slds-theme_default slds-m-top_x-small"  >
+            <dl class="slds-dl_horizontal">
+                <dt class="slds-dl_horizontal__label slds-truncate">Context:</dt>
+                <dd class="slds-dl_horizontal__detail">{objectApiName} with ID {recordId}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Field List:</dt>
+                <dd class="slds-dl_horizontal__detail">{fieldListStr}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
+                <dd class="slds-dl_horizontal__detail">
+                    <lightning-formatted-url    value="https://github.com/pegros/PEG_LWR/blob/master/help/sfpegRecordDataUtl.md"
+                                                label="See Help on GitHub"
+                                                target="_blank">
+                    </lightning-formatted-url>
+                </dd>
+            </dl>
+        </div>
+    </template>
+</template>

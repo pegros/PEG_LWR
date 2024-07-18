@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>SF PEG Record Data Loader</masterLabel>
+    <description>Technical component enforcing the loading of record data in the Lightning data cache.</description>
+    <targets>
+        <target>lightningCommunity__Default</target>  
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property   name="objectApiName"
+                        label="Object API Name"
+                        type="String"
+                        default="{!Route.objectApiName}"
+                        description="API Name of Object for evaluation (usually current object, but may be User)."/>
+            <property   name="recordId"
+                        label="Record ID"
+                        type="String"
+                        default="{!Route.recordId}"
+                        description="ID of Record for evaluation (usually current record). Current User ID is used if no data is provided."/>
+            <property   name="fieldListStr"
+                        label="Field List"
+                        type="String"
+                        description="JSON List of API Names for the fields to be loaded on the specified record."/>            
+            <property   name="isDebug"
+                        label="Show Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to activate debug information." />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

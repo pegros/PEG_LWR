@@ -33,8 +33,9 @@
 
 import { LightningElement, api, wire } from 'lwc';
 import { CurrentPageReference } from 'lightning/navigation';
+import { NavigationMixin } from 'lightning/navigation';
 
-export default class SfpegSkipLinksDsp extends LightningElement {
+export default class SfpegSkipLinksDsp extends NavigationMixin(LightningElement) {
 
     //----------------------------------------------------------------
     // Main configuration properties (for Site Builder)
@@ -51,7 +52,9 @@ export default class SfpegSkipLinksDsp extends LightningElement {
     //----------------------------------------------------------------
     // Internal technical properties (for Site Builder)
     //----------------------------------------------------------------
+    isSiteBuilder;
     skipLinks = [];     // List of skipLinks to display
+    isNotFirst = false; // Track first skiplink usage in current page
 
     pageRef;
     @wire(CurrentPageReference)
@@ -60,6 +63,10 @@ export default class SfpegSkipLinksDsp extends LightningElement {
         /*if (this.isDebug) console.log('wiredPage: old page ',JSON.stringify(this.pageRef));
         if (this.isDebug) console.log('wiredPage: same page? ',this.pageRef == data);*/
         this.pageRef = data;
+
+        let app = data && data.state && data.state.app;
+        if (this.isDebug) console.log('wiredPage: app extracted ',app);
+        this.isSiteBuilder = (app === 'commeditor');
 
         if (this.isDebug) console.log('wiredPage: END skipLinks');
     };
@@ -79,6 +86,15 @@ export default class SfpegSkipLinksDsp extends LightningElement {
         if (this.isDebug) console.log('rendered: START skipLinks');
         //if (this.isDebug) console.log('rendered: page ref ',JSON.stringify(this.pageRef));
         if (this.isDebug) console.log('rendered: skipLinks ',JSON.stringify(this.skipLinks));
+        
+        this.isNotFirst = false;
+        if (this.isDebug) console.log('rendered: isNotFirst init ',this.isNotFirst);
+
+        document.body.setAttribute('tabindex','-1');
+        document.body.focus();
+        document.body.removeAttribute('tabindex');
+        if (this.isDebug) console.log('rendered: focus reinitialized ');
+
         if (this.isDebug) console.log('rendered: END skipLinks');
     }
 
@@ -89,26 +105,45 @@ export default class SfpegSkipLinksDsp extends LightningElement {
         if (this.isDebug) console.log('disconnected: END skipLinks');
     }
 
+    //----------------------------------------------------------------
+    // Event Handlers
+    //----------------------------------------------------------------
+    
+    // workaround implemented as 1st navigation via href does not always work.
+    handleClick(event) {
+        if (this.isDebug) console.log('handleClick: START skipLinks',event);
+
+        if (this.isNotFirst) {
+            if (this.isDebug) console.log('handleClick: END skipLinks / not first skiplinks usage');
+            return;
+        }
+       
+        let href = event.srcElement?.href;
+        if (this.isDebug) console.log('handleClick: src href',href);
+
+        if (href) {
+            if (this.isDebug) console.log('handleClick: scheduling href reopening');
+            this.isNotFirst = true;
+
+            setTimeout(() => {
+                window.open(href,"_self");
+                if (this.isDebug) console.log('handleClick: END skipLinks / 2nd reopen done');
+            }, 1000);
+            if (this.isDebug) console.log('handleClick: reopening scheduled');
+        }
+        else {
+            console.warn('handleClick: END skiplink / no reopen scheduled');
+        }
+    }
+
+
+    //----------------------------------------------------------------
+    // Utilities
+    //----------------------------------------------------------------
+
     initLinks = () => { 
         if (this.isDebug) console.log('initLinks: START');
         if (this.isDebug) console.log('initLinks: current skipLinks ',JSON.stringify(this.skipLinks));
-
-        /*let titles = document.querySelectorAll('h1');
-        if (this.isDebug) console.log('initLinks: titles fetched ',titles);
-        if (this.isDebug) console.log('initLinks: #h1 titles fetched ',titles?.length);
-        if (titles) {
-            titles.forEach(item => {
-                if (this.isDebug) console.log('initLinks: h1 title extracted ',item.outerText);
-            });
-        }
-        let titles2 = document.querySelectorAll('h2');
-        if (this.isDebug) console.log('initLinks: h2 titles fetched ',titles2);
-        if (this.isDebug) console.log('initLinks: #h2 titles fetched ',titles?.length);
-        if (titles2) {
-            titles2.forEach(item => {
-                if (this.isDebug) console.log('initLinks: h2 title extracted ',item.outerText);
-            });
-        }*/
 
         let anchors = document.querySelectorAll('c-sfpeg-anchor-dsp');
         if (this.isDebug) console.log('initLinks: anchors fetched ',anchors);
@@ -128,4 +163,5 @@ export default class SfpegSkipLinksDsp extends LightningElement {
             if (this.isDebug) console.log('initLinks: END / skipLinks reset to empty');
         }
     }
+
 }

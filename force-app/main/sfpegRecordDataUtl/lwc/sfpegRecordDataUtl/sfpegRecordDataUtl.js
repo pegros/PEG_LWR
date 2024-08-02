@@ -60,7 +60,7 @@ export default class SfpegRecordDataUtl extends LightningElement {
     // Current page Data 
     @wire(CurrentPageReference)
     wiredPage(data){
-        if (this.isDebug) console.log('wiredPage: START dataload container for ',this.sourceField);
+        if (this.isDebug) console.log('wiredPage: START dataload container for ',this.fieldListStr);
         if (this.isDebug) console.log('wiredPage: with page ',JSON.stringify(data));
 
         let app = data && data.state && data.state.app;
@@ -95,18 +95,20 @@ export default class SfpegRecordDataUtl extends LightningElement {
         if (this.isDebug) console.log('connected: and record ',this.recordId);
             
         try {
-            let fieldList = JSON.parse(this.fieldListStr);
-            if (this.isDebug) console.log('connected: fieldList parsed ',JSON.stringify(fieldList));
-            fieldList.forEach(item => {
-                item = this.objectApiName + '.' + item;
+            let parsedFieldList = JSON.parse(this.fieldListStr);
+            if (this.isDebug) console.log('connected: fieldList parsed ',JSON.stringify(parsedFieldList));
+
+            let fieldList = [];
+            parsedFieldList.forEach(item => {
+                fieldList.push(this.objectApiName + '.' + item);
             });
-            if (this.isDebug) console.log('connected: fieldList reworked ');
+            if (this.isDebug) console.log('connected: fieldList init ', JSON.stringify(fieldList));
             this.fieldList = fieldList;
         }
         catch (error) {
             console.error('connected: fieldList parsing failed ',JSON.stringify(error));
         }
-        if (this.isDebug) console.log('connected: END dataload with fieldList ',JSN.stringify(this.fieldList));
+        if (this.isDebug) console.log('connected: END dataload with fieldList ',JSON.stringify(this.fieldList));
 
     }
 }

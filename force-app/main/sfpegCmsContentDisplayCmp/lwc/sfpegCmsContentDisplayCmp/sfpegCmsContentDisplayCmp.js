@@ -85,7 +85,7 @@ export default class SfpegCmsContentDisplayCmp extends LightningElement {
         if (this.isDebug) console.log('wiredContent: START with key ',this.contentKey);
         if (this.isDebug) console.log('wiredContent: and title? ',this.showTitle);
         if (this.isDebug) console.log('wiredContent: and title level ',this.titleLevel);
-        if (this.isDebug) console.log('wiredContent: and exceprt field ',this.excerptField);
+        if (this.isDebug) console.log('wiredContent: and excerpt field ',this.excerptField);
         if (this.isDebug) console.log('wiredContent: and content field ',this.contentField);
         if (this.isDebug) console.log('wiredContent: data received ',JSON.stringify(result));
         if (result?.data) {

@@ -20,7 +20,7 @@
                         type="Boolean"
                         description="Flag to display Content Title" />
             <property   name="titleLevel"
-                        label="Title Level?"
+                        label="Title Level"
                         type="String"
                         datasource="h1,h2,h3,h4"
                         description="Level of the HTML tag used to display the title" />

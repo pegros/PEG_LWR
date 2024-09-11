@@ -135,6 +135,7 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
     //----------------------------------------------------------------
     evalCondition = function() {
         if (this.isDebug) console.log('evalCondition: START with currentValue ',this.currentValue);
+        if (this.isDebug) console.log('evalCondition: and targetValue ',this.targetValue);
 
         if (this.forceDisplay) {
             this.showCondition = true;
@@ -145,46 +146,59 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
         if (this.isDebug) console.log('evalCondition: evaluating operator ',this.operator);
         if (this.isDebug) console.log('evalCondition: current value type ',typeof this.currentValue);
         if (this.isDebug) console.log('evalCondition: target value type ',typeof this.targetValue);
-        switch (this.operator) {
-            case 'IS TRUE':
-                this.showCondition = Boolean(this.currentValue);
-                break;
-            case 'IS FALSE':
-                this.showCondition = !Boolean(this.currentValue);
-                break;
-            case 'IS BLANK':
-                this.showCondition = !Boolean(this.currentValue);
-                break;
-            case 'IS NOT BLANK':
-                this.showCondition = Boolean(this.currentValue);
-                break;
-            case 'EQUALS':
-                this.showCondition = (this.currentValue === this.targetValue);
-                break;
-            case 'NOT EQUALS':
-                this.showCondition = (this.currentValue !== this.targetValue);
-                break;
-            case 'IN':
-                this.showCondition = this.targetValue.split(';').includes(this.currentValue);
-                break;
-            case 'NOT IN':
-                this.showCondition = !(this.targetValue.split(';').includes(this.currentValue));
-                break;
-            case 'CONTAINS':
-                this.showCondition = this.currentValue.split(';').includes(this.targetValue);
-                break;
-            case 'CONTAINS NOT':
-                this.showCondition = !(this.currentValue.split(';').includes(this.targetValue));
-                break;
-            case 'MATCHES':
-                const regex = new RegExp(this.targetValue);
-                this.showCondition = regex.test(this.currentValue);
-                break;
-            case 'MATCHES NOT':
-                this.showCondition = !(regex.test(this.currentValue));
-                break;
-            default:
-                this.showCondition = false;  
+
+        if (typeof this.currentValue !== 'string') {
+            console.warn('evalCondition: unable to evaluate non string currentValue ',this.currentValue);
+            this.showCondition = false;  
+        }
+        else if (typeof this.targetValue !== 'string') {
+            console.warn('evalCondition: unable to evaluate non string targetValue ',this.targetValue);
+            this.showCondition = false;  
+        }
+        else {
+            if (this.isDebug) console.log('evalCondition: evaluating operator ',this.operator);
+            switch (this.operator) {
+                case 'IS TRUE':
+                    this.showCondition = Boolean(this.currentValue);
+                    break;
+                case 'IS FALSE':
+                    this.showCondition = !Boolean(this.currentValue);
+                    break;
+                case 'IS BLANK':
+                    this.showCondition = !Boolean(this.currentValue);
+                    break;
+                case 'IS NOT BLANK':
+                    this.showCondition = Boolean(this.currentValue);
+                    break;
+                case 'EQUALS':
+                    this.showCondition = (this.currentValue === this.targetValue);
+                    break;
+                case 'NOT EQUALS':
+                    this.showCondition = (this.currentValue !== this.targetValue);
+                    break;
+                case 'IN':
+                    this.showCondition = this.targetValue.split(';').includes(this.currentValue);
+                    break;
+                case 'NOT IN':
+                    this.showCondition = !(this.targetValue.split(';').includes(this.currentValue));
+                    break;
+                case 'CONTAINS':
+                    this.showCondition = this.currentValue.split(';').includes(this.targetValue);
+                    break;
+                case 'CONTAINS NOT':
+                    this.showCondition = !(this.currentValue.split(';').includes(this.targetValue));
+                    break;
+                case 'MATCHES':
+                    const regex = new RegExp(this.targetValue);
+                    this.showCondition = regex.test(this.currentValue);
+                    break;
+                case 'MATCHES NOT':
+                    const regex2 = new RegExp(this.targetValue);
+                    this.showCondition = !(regex2.test(this.currentValue));
+                    break;
+                default:
+                    this.showCondition = false;  
+            }
         }
         if (this.isDebug) console.log('evalCondition: END / showCondition ', this.showCondition);
     }

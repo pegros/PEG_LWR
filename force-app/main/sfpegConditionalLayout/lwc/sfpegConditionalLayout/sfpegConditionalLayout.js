@@ -147,14 +147,14 @@ export default class SfpegConditionalContainerCmp extends LightningElement {
         if (this.isDebug) console.log('evalCondition: current value type ',typeof this.currentValue);
         if (this.isDebug) console.log('evalCondition: target value type ',typeof this.targetValue);
 
-        if (typeof this.currentValue !== 'string') {
+        if ((typeof this.currentValue !== 'string') && (typeof this.currentValue !== 'boolean')) {
             console.warn('evalCondition: unable to evaluate non string currentValue ',this.currentValue);
             this.showCondition = false;  
         }
-        else if (typeof this.targetValue !== 'string') {
+        /*else if (typeof this.targetValue !== 'string') {
             console.warn('evalCondition: unable to evaluate non string targetValue ',this.targetValue);
             this.showCondition = false;  
-        }
+        }*/
         else {
             if (this.isDebug) console.log('evalCondition: evaluating operator ',this.operator);
             switch (this.operator) {

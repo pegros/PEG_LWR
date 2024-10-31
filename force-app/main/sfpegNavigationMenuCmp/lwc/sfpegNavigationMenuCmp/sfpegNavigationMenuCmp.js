@@ -111,7 +111,8 @@ export default class SfpegNavigationMenuCmp extends NavigationMixin(LightningEle
                 if (this.isDebug) console.log('wiredMenu: processing menu item ',item);
                 let newItem = {... item};
                 newItem.labelOrig = item.label;
-                newItem.title = this.titlePrefix + ' ' + this.navLabel;
+                //newItem.title = this.titlePrefix + ' ' + this.navLabel;
+                newItem.title = this.titlePrefix + ' ' + item.label;
 
                 if (newItem.label?.includes('&')) {
                     if (this.isDebug) console.log('wiredHeaderMenus: unescaping label');

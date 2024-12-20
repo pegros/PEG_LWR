@@ -41,7 +41,7 @@ page while the rest of the page contains predefined data (e.g. filtered list of 
 
 ![CMS Content Display](/media/sfpegCmsContentDisplayCmp.png)
 
-#### [sfpegCmsRichtextDisplay](/help/sfpegCmsRichtextDisplay.md)
+#### [sfpegCmsRichtextDisplay](/help/sfpegCmsRichTextDisplay.md)
 This display component provides the ability to rework CMS richtext content 
 before actual display to bypass some URL and accessibility issues.
 
@@ -95,25 +95,6 @@ This technical component enables to optimise page rendering performances when
 using conditional display. It has no UI output but enables to force the loading
 of record data right from the initial rendering of a LWR Site record page (before
 the conditions are evaluated and the proper components instantiated)
-
-
-### Embedding Utilities
-
-This section groups a set of components enabling to embed miscellaneous content (files or
-external page) in LWR Sites.
-
-#### [sfpegEmbedCmp](/help/sfpegEmbedCmp.md)
-This component enables to display the content of an external page via an iFrame in a
-LWR Experience Site (as long as CORS are properly configured on both Salesforce and
-the external site).
-
-![Navigation Menu](/media/sfpegEmbedCmp.png)
-
-#### [sfpegFileEmbedCmp](/help/sfpegFileEmbedCmp.md)
-This component enables to display and play the content of a Salesforce media file
-(image, audio, video) given its ContentDocument ID in a LWR Site.
-
-![Navigation Menu](/media/sfpegFileEmbedCmp.png)
 
 
 ### Navigation Utilities

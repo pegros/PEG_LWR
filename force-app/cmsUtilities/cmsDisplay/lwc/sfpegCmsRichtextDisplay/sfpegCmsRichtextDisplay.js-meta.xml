@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>CMS Richtext Display</masterLabel>
+    <description>SFPEG Component for CMS Richtext Display (after some rework for accessibility)</description>
+    <targets>
+        <target>lightningCommunity__Default</target>  
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property   name="contentData"
+                        label="Richtext Data"
+                        type="String"
+                        description="Original CMS richtext content to display" />
+            <property   name="contentClass"
+                        label="Content CSS"
+                        type="String"
+                        description="CSS to apply to richtext Content section" />
+
+            <property   name="linkTitle"
+                        label="Link Title"
+                        type="String"
+                        description="Default title added to all links included in the content (for accessibility)" />
+
+            <property   name="isDebug"
+                        label="Show Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to activate debug information." />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

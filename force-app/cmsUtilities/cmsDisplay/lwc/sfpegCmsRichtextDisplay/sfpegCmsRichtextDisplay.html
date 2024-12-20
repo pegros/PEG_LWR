@@ -1,0 +1,28 @@
+<template>
+    <!-- Content Display -->
+    <template lwc:if={contentData}>
+        <section class={contentClass}>
+            <lightning-formatted-rich-text class={contentClass} value={content} >
+            </lightning-formatted-rich-text>
+        </section>
+    </template>
+
+    <!-- Help Display -->
+    <template if:true={isDebug}>
+        <div class="slds-box slds-box_small slds-theme_default slds-m-top_x-small"  >
+            <dl class="slds-dl_horizontal">
+                <dt class="slds-dl_horizontal__label slds-truncate">Display Class:</dt>
+                <dd class="slds-dl_horizontal__detail">{contentClass}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Link Title:</dt>
+                <dd class="slds-dl_horizontal__detail">{linkTitle}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
+                <dd class="slds-dl_horizontal__detail">
+                    <lightning-formatted-url    value="https://github.com/pegros/PEG_LWR/blob/master/help/sfpegCmsRichtextDisplay.md"
+                                                label="See Help on GitHub"
+                                                target="_blank">
+                    </lightning-formatted-url>
+                </dd>
+            </dl>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,350 @@
+<template>
+    <lightning-card title={lblCmpTitle} icon-name="standard:record_update" class="slds-box slds-box_x-small slds-theme_shade slds-scrollable_y sfpegCmsPageEditor">
+        <lightning-helptext slot="actions" content={lblCmpHelp}></lightning-helptext>
+        <p class="slds-text-body_regular slds-p-horizontal_medium">{headline}</p>
+
+        <template lwc:if={isPageType}>
+            <lightning-layout multiple-rows="true" pull-to-boundary="small">
+
+                <!-- Icon Management Section -->
+                <lightning-layout-item padding="horizontal-small" size="12" medium-device-size="6">
+                    <lightning-card title={lblIcon} class="slds-theme_default">
+                        <template lwc:if={isIconEdit}>
+                            <lightning-button-icon  slot="actions"
+                                                    icon-name="utility:clear"   title={lblClose}
+                                                    icon-class="slds-text-color_destructive"
+                                                    size="medium"               variant="bare"
+                                                    onclick={toggleIconMode} >
+                            </lightning-button-icon>
+                        </template>
+                        <template lwc:else>
+                            <lightning-button-icon  slot="actions"
+                                                    icon-name="utility:edit"    title={lblEdit}
+                                                    size="medium"               variant="bare"
+                                                    onclick={toggleIconMode} >
+                            </lightning-button-icon>
+                        </template>
+            
+                        <div class="slds-p-horizontal_medium">
+                            <div class="slds-media slds-media_center">
+                                <template lwc:if={iconURL}>
+                                    <div class="slds-media__figure">
+                                        <span class="slds-avatar slds-avatar_large">
+                                            <img  src={iconURL} aria-hidden="true" alt="" style="object-fit:contain;width:48px;height:48px;" />
+                                        </span>
+                                    </div>
+                                </template>
+                                <div class="slds-media__body">
+                                    <template lwc:if={isIconEdit}>
+                                        <template lwc:if={iconNames}>
+                                            <lightning-select   lwc:ref="iconName"
+                                                                name="iconList"     label={lblSelect}
+                                                                value={iconName}    options={iconNames}
+                                                                onchange={handleIconChange} >
+                                            </lightning-select>
+                                        </template>
+                                        <template lwc:else>
+                                            <p class="slds-text-body_regular slds-text-color_destructive"><strong>⚠️ Icon names retrieval issue</strong></p>
+                                        </template>
+                                    </template>
+                                    <template lwc:elseif={iconName}>
+                                        <template lwc:if={iconURL}>
+                                            <p class="slds-text-body_regular"><strong>{iconName}</strong></p>
+                                        </template>
+                                        <template lwc:else>
+                                            <p class="slds-text-body_regular slds-text-color_destructive"><strong>🚨 {iconName} ??</strong></p>
+                                        </template>
+                                    </template>
+                                    <template lwc:else>
+                                        <p class="slds-text-body_regular">❌</p>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </lightning-card>
+                </lightning-layout-item>
+
+                <!-- Display Variant Management Section -->
+                <lightning-layout-item padding="horizontal-small" size="12" medium-device-size="6">
+                    <lightning-card title={lblVariant} class="slds-theme_default">
+                        <template lwc:if={isVariantEdit}>
+                            <lightning-button-icon  slot="actions"
+                                                    icon-name="utility:clear"   title={lblClose}
+                                                    icon-class="slds-text-color_destructive"
+                                                    size="medium"               variant="bare"
+                                                    onclick={toggleVariantMode} >
+                            </lightning-button-icon>
+                        </template>
+                        <template lwc:else>
+                            <lightning-button-icon  slot="actions"
+                                                    icon-name="utility:edit"    title={lblEdit}
+                                                    size="medium"               variant="bare"
+                                                    onclick={toggleVariantMode} >
+                            </lightning-button-icon>
+                        </template>
+            
+                        <div class="slds-p-horizontal_medium">
+                            <template lwc:if={isVariantEdit}>
+                                <template lwc:if={displayVariants}>
+                                    <lightning-select   lwc:ref="displayVariants"
+                                                        name="variantList"      label={lblSelect}
+                                                        value={variantName}     options={displayVariants}
+                                                        onchange={handleVariantChange} >
+                                    </lightning-select>
+                                </template>
+                                <template lwc:else>
+                                    <p class="slds-text-body_regular slds-text-color_destructive"><strong>⚠️ No variant configured!</strong></p>
+                                </template>
+                            </template>
+                            <template lwc:elseif={variantName}>
+                                <template lwc:if={isValidVariant}>
+                                    <p class="slds-text-body_regular slds-p-vertical_medium"><strong>{variantName}</strong></p>
+                                </template>
+                                <template lwc:else>
+                                    <p class="slds-text-body_regular slds-p-vertical_medium slds-text-color_destructive"><strong>🚨 {variantName} ??</strong></p>
+                                </template>
+                            </template>
+                            <template lwc:else>
+                                <p class="slds-text-body_regular slds-p-vertical_medium">❌</p>
+                            </template>
+                        </div>
+                    </lightning-card>
+                </lightning-layout-item>
+            </lightning-layout>
+
+            <!-- Related Pages Management Section -->
+            <lightning-card title={lblPages} class="slds-theme_default">
+                <template lwc:if={isPageEdit}>
+                    <lightning-button-icon  slot="actions"
+                                            icon-name="utility:clear"   title={lblClose}
+                                            icon-class="slds-text-color_destructive"
+                                            size="medium"               variant="bare"
+                                            onclick={togglePageMode} >
+                    </lightning-button-icon>
+                </template>
+                <template lwc:else>
+                    <lightning-button-icon  slot="actions"
+                                            icon-name="utility:edit"    title={lblEdit}
+                                            size="medium"               variant="bare"
+                                            onclick={togglePageMode} >
+                    </lightning-button-icon>
+                </template>
+
+                <div class="slds-p-horizontal_medium">
+                    <!-- Page Edit Mode Display -->
+                    <template lwc:if={isPageEdit}>
+                        <lightning-layout multiple-rows="true" pull-to-boundary="small">
+                            <lightning-layout-item padding="horizontal-small" size="12" medium-device-size="6">
+                                <template lwc:if={relatedPages}>
+                                    <p class="slds-text-title slds-text-color_destructive slds-m-top_small">{lblManagePages}</p>
+                                    <template for:each={relatedPages} for:item="iterRel">
+                                        <div class="slds-box slds-box_x-small slds-media slds-m-vertical_x-small" key={iterRel.ContentKey}>
+                                            <div class="slds-media__body">
+                                                    <p class="slds-text-body_regular sfpegCmsPageBreak"><strong>{iterRel.Name}</strong></p>
+                                                    <p class="slds-text-body_small slds-text-font_monospace slds-text-color_weak sfpegCmsPageBreak">{iterRel.ContentKey}</p> 
+                                            </div>
+                                            <div class="slds-media__figure slds-media__figure_reverse slds-media_center">
+                                                <div class="slds-grid slds-grid_vertical">
+                                                    <div class="slds-col">
+                                                        <lightning-button-icon  icon-name="utility:up"
+                                                                                value={iterRel.ContentKey}
+                                                                                title={lblUp}
+                                                                                size="small"
+                                                                                variant="bare"
+                                                                                onclick={handleMoveUp} >
+                                                       </lightning-button-icon>
+                                                    </div>
+                                                    <div class="slds-col">
+                                                        <lightning-button-icon  icon-name="utility:delete"
+                                                                                icon-class="slds-text-color_destructive"
+                                                                                value={iterRel.ContentKey}
+                                                                                title={lblRemove}
+                                                                                size="small"
+                                                                                variant="bare"
+                                                                                onclick={handleRemove} >
+                                                        </lightning-button-icon>
+                                                    </div>
+                                                    <div class="slds-col">
+                                                        <lightning-button-icon  icon-name="utility:down"
+                                                                                value={iterRel.ContentKey}
+                                                                                title={lblDown}
+                                                                                size="small"
+                                                                                variant="bare"
+                                                                                onclick={handleMoveDown} >
+                                                        </lightning-button-icon>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </template>
+                            </lightning-layout-item>
+
+                            <lightning-layout-item padding="horizontal-small" size="12" medium-device-size="6">
+                                <template lwc:if={hasAvailablePages}>
+                                    <p class="slds-text-title slds-text-color_destructive slds-m-top_small">{lblAddPage}</p>
+                                    <template for:each={availablePages} for:item="iterRel">
+                                        <div class="slds-box slds-box_x-small slds-media slds-m-vertical_x-small" key={iterRel.ContentKey}>
+                                            <div class="slds-media__body">
+                                                <p class="slds-text-body_regular sfpegCmsPageBreak"><strong>{iterRel.Name}</strong></p>
+                                                <p class="slds-text-body_small slds-text-font_monospace slds-text-color_weak sfpegCmsPageBreak" >{iterRel.ContentKey}</p> 
+                                            </div>
+                                            <div class="slds-media__figure slds-media__figure_reverse slds-media_center">
+                                                <lightning-button-icon  icon-name="utility:new"
+                                                                        icon-class="slds-text-color_destructive"
+                                                                        value={iterRel.ContentKey}
+                                                                        title={lblAdd}
+                                                                        size="small"
+                                                                        variant="bare"
+                                                                        onclick={handleAdd} >
+                                                </lightning-button-icon>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </template>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </template>
+            
+                    <!-- Page Read Mode Display -->
+                    <template lwc:else>
+                        <lightning-layout multiple-rows="true" pull-to-boundary="small">
+                            <template for:each={relatedPages} for:item="iterRel">
+                                <lightning-layout-item padding="horizontal-small" size="12" medium-device-size="6" large-device-size="4" key={iterRel.ContentKey}>
+                                    <div class="slds-box slds-box_x-small slds-m-vertical_x-small">
+                                        <p class="slds-text-body_regular sfpegCmsPageBreak" ><strong>{iterRel.Name}</strong></p>
+                                        <p class="slds-text-body_small slds-text-font_monospace slds-text-color_weak sfpegCmsPageBreak">{iterRel.ContentKey}</p> 
+                                    </div>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                    </template>
+                </div>
+            </lightning-card>
+
+            <!-- Links Management Section -->
+            <lightning-card title={lblLinks} class="slds-theme_default">
+                <template lwc:if={isLinkEdit}>
+                    <lightning-button-icon  slot="actions"
+                                            icon-name="utility:clear"   title={lblClose}
+                                            icon-class="slds-text-color_destructive"    
+                                            size="medium"               variant="bare"
+                                            onclick={toggleLinkMode} >
+                    </lightning-button-icon>
+                </template>
+                <template lwc:else>
+                    <lightning-button-icon  slot="actions"
+                                            icon-name="utility:edit"    title={lblEdit}
+                                            size="medium"               variant="bare"
+                                            onclick={toggleLinkMode} >
+                    </lightning-button-icon>
+                </template>
+
+                <div class="slds-p-horizontal_medium">
+                    <!-- Links Edit Mode Display -->
+                    <template lwc:if={isLinkEdit}>
+                        <lightning-layout multiple-rows="true" pull-to-boundary="small">
+                            <lightning-layout-item padding="horizontal-small" size="12" medium-device-size="6">
+
+                                <template lwc:if={links}>
+                                    <p class="slds-text-title slds-text-color_destructive slds-m-top_small">{lblManageLinks}</p>
+                                    <template for:each={links} for:item="iterLink">
+                                        <div class="slds-box slds-box_x-small slds-media slds-m-vertical_x-small" key={iterLink.label}>
+                                            <div class="slds-media__body">
+                                                <a class="slds-text-body_regular" href="#" title={iterLink.title}>
+                                                    <span>{iterLink.label}</span>
+                                                </a>
+                                                <p class="slds-text-body_small slds-text-font_monospace slds-text-color_weak sfpegCmsPageBreak">{iterLink.url}
+                                                    <span class="sfpegCmsPageNoBreak"> ({iterLink.target})</span></p> 
+                                            </div>
+                                            <div class="slds-media__figure slds-media__figure_reverse slds-media_center">
+                                                <div class="slds-grid slds-grid_vertical">
+                                                    <div class="slds-col">
+                                                        <lightning-button-icon  icon-name="utility:up"
+                                                                                value={iterLink.label}
+                                                                                title={lblUp}
+                                                                                size="small"
+                                                                                variant="bare"
+                                                                                onclick={handleMoveLinkUp} >
+                                                        </lightning-button-icon>
+                                                    </div>
+                                                    <div class="slds-col">
+                                                        <lightning-button-icon  icon-name="utility:delete"
+                                                                                icon-class="slds-text-color_destructive"
+                                                                                value={iterLink.label}
+                                                                                title={lblRemove}
+                                                                                size="small"
+                                                                                variant="bare"
+                                                                                onclick={handleRemoveLink} >
+                                                        </lightning-button-icon>
+                                                    </div>
+                                                    <div class="slds-col">
+                                                        <lightning-button-icon  icon-name="utility:down"
+                                                                                value={iterLink.label}
+                                                                                title={lblDown}
+                                                                                size="small"
+                                                                                variant="bare"
+                                                                                onclick={handleMoveLinkDown} >
+                                                        </lightning-button-icon>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </template>
+                            </lightning-layout-item>
+                            <lightning-layout-item padding="horizontal-small" size="12" medium-device-size="6">
+                                <form class="slds-m-top_medium" lwc:ref="linkForm" onsubmit={handleAddLink}>
+                                    <p class="slds-text-title slds-text-color_destructive slds-m-top_medium">{lblAddLink}</p>
+                                    <lightning-input    type="text" name="label" required label={lblLabel}></lightning-input>
+                                    <lightning-input    type="text" name="title" required label={lblTitle}></lightning-input>
+                                    <lightning-input    type="text" name="url"   required label={lblUrl}
+                                                        field-level-help={lblUrlHelp}></lightning-input>
+                        
+                                    <lightning-button   class="slds-align_absolute-center slds-m-top_small" 
+                                                        icon-name="utility:new"
+                                                        label={lblAdd}
+                                                        size="small"
+                                                        variant="destructive-text"
+                                                        type="submit" >
+                                    </lightning-button>                        
+                                </form>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </template>
+
+                    <!-- Links Read Mode Display -->
+                    <template lwc:else>
+                        <lightning-layout multiple-rows="true" pull-to-boundary="small">
+                            <template for:each={links} for:item="iterLink">
+                                <lightning-layout-item padding="horizontal-small" size="12" medium-device-size="6" large-device-size="4" key={iterLink.ContentKey}>
+                                    <div class="slds-box slds-box_x-small slds-m-vertical_x-small">
+                                        <a class="slds-text-body_regular" href="#" title={iterLink.title}>
+                                            <span>{iterLink.label}</span>
+                                        </a>
+                                        <p class="slds-text-body_small slds-text-font_monospace slds-text-color_weak sfpegCmsPageBreak">{iterLink.url}
+                                            <span class="sfpegCmsPageNoBreak"> ({iterLink.target})</span></p> 
+                                    </div>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                    </template>
+                </div>
+            </lightning-card>
+
+        </template>
+
+        <!-- Bad Content Type Message -->
+        <template lwc:else>
+            <div class="slds-box slds-m-vertical_small slds-media slds-media_center">
+                <div class="slds-media__figure">
+                    <lightning-icon icon-name="utility:error" variant="error" size="medium">
+                    </lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                    <p class="slds-text-heading_small slds-text-color_error">{lblCmpError}</p>
+                </div>
+            </div>
+        </template>
+    </lightning-card>
+</template>

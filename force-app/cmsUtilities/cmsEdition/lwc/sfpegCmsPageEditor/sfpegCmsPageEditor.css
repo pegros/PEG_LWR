@@ -1,0 +1,14 @@
+.sfpegCmsPageEditor {
+    position:absolute;
+    top: 155px;
+    right: 55px;
+    width: calc(100vw - 110px);
+    height: calc(100vh - 160px);
+    z-index: 2000;
+}
+.sfpegCmsPageBreak {
+    word-break: break-all;
+}
+.sfpegCmsPageNoBreak {
+    word-break: keep-all;
+}

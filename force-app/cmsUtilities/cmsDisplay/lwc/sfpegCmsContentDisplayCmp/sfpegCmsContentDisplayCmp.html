@@ -1,0 +1,70 @@
+<template>
+    <!-- Base Content Display -->
+    <article>
+       
+        <template lwc:if={contentTitle}>
+            <template lwc:if={isH2}>
+                <h2 class={titleClass}>
+                    <lightning-formatted-text class={titleClass} value={contentTitle} linkify>
+                    </lightning-formatted-text>
+                </h2>
+            </template>
+            <template lwc:elseif={isH1}>
+                <h1 class={titleClass}>
+                    <lightning-formatted-text class={titleClass} value={contentTitle} linkify>
+                    </lightning-formatted-text>
+                </h1>
+            </template>
+            <template lwc:elseif={isH3}>
+                <h3 class={titleClass}>
+                    <lightning-formatted-text class={titleClass} value={contentTitle} linkify>
+                    </lightning-formatted-text>
+                </h3>
+            </template>
+            <template lwc:else>
+                <h4 class={titleClass}>
+                    <lightning-formatted-text class={titleClass} value={contentTitle} linkify>
+                    </lightning-formatted-text>
+                </h4>
+            </template>
+        </template>
+
+        <template lwc:if={contentExcerpt}>
+            <section class={excerptClass}>
+                <lightning-formatted-text class={excerptClass} value={contentExcerpt} linkify>
+                </lightning-formatted-text>
+            </section>
+        </template>
+
+        <template lwc:if={contentData}>
+            <c-sfpeg-cms-richtext-display   content-class={contentClass}
+                                            content-data={contentData}
+                                            link-title={linkTitle}
+                                            is-debug={isDebug}>
+            </c-sfpeg-cms-richtext-display>
+        </template>
+    </article>
+
+    <!-- Help Display -->
+    <template if:true={isDebug}>
+        <div class="slds-box slds-box_small slds-theme_default slds-m-top_x-small"  >
+            <dl class="slds-dl_horizontal">
+                <dt class="slds-dl_horizontal__label slds-truncate">Content Key:</dt>
+                <dd class="slds-dl_horizontal__detail">{contentKey}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Content Fields:</dt>
+                <dd class="slds-dl_horizontal__detail">Title? {showTitle} / Excerpt: {excerptField} / Body: {contentField}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Display Classes:</dt>
+                <dd class="slds-dl_horizontal__detail">Title: {titleClass} / Excerpt: {excerptClass} / Content: {contentClass}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Link Title:</dt>
+                <dd class="slds-dl_horizontal__detail">{linkTitle}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
+                <dd class="slds-dl_horizontal__detail">
+                    <lightning-formatted-url    value="https://github.com/pegros/PEG_LWR/blob/master/help/sfpegCmsContentDisplayCmp.md"
+                                                label="See Help on GitHub"
+                                                target="_blank">
+                    </lightning-formatted-url>
+                </dd>
+            </dl>
+        </div>
+    </template>
+</template>

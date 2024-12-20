@@ -1,0 +1,34 @@
+<template>
+    <template lwc:if={displayedList}>
+        <div class={wrappingCss}>
+            <template for:each={displayedList} for:item="item">
+                <div key={item.contentKey} class={contentCss}>
+                    <lwc:component  lwc:is={displayConstructor}
+                                    lwc:spread={item.properties}>
+                    </lwc:component>
+                </div>
+            </template>
+        </div>
+    </template>
+
+    <!-- Help Display -->
+    <template lwc:if={isDebug}>
+        <div class="slds-box slds-box_small slds-theme_default slds-m-top_x-small"  >
+            <dl class="slds-dl_horizontal">
+                <dt class="slds-dl_horizontal__label slds-truncate">Content Keys:</dt>
+                <dd class="slds-dl_horizontal__detail">{contentKeys}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Component:</dt>
+                <dd class="slds-dl_horizontal__detail">{displayCmp}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Configuration:</dt>
+                <dd class="slds-dl_horizontal__detail">{displayConfig}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
+                <dd class="slds-dl_horizontal__detail">
+                    <lightning-formatted-url    value="https://github.com/pegros/PEG_LWR/blob/master/help/sfpegCmsListDisplay.md"
+                                                label="See Help on GitHub"
+                                                target="_blank">
+                    </lightning-formatted-url>
+                </dd>
+            </dl>
+        </div>
+    </template>
+</template>

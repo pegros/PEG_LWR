@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>59.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>SF PEG Navigation Menu</masterLabel>
+    <description>Experience Site Navigation Menu Display</description>
+    <targets>
+        <target>lightningCommunity__Default</target>  
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property   name="navLabel"
+                        label="Navigation Label"
+                        type="String"
+                        description="Label of the Navigation Menu to be displayed." />
+            <property   name="displayMode"
+                        label="Display Mode"
+                        type="String"
+                        datasource="tabs,links,Vlist,Olist"
+                        default="links"
+                        description="Display mode for the Navigation Menu" />
+
+            <property   name="currentTab"
+                        label="Current Tab label"
+                        type="String"
+                        default="Current"
+                        description="When in tabs display mode, label of the currently selected tab." />
+                        
+            <property   name="titlePrefix"
+                        label="Link Title Prefix"
+                        type="String"
+                        description="When using links, prefix added to teh link label for the title." />
+            <property   name="showHome"
+                        label="Show Home Item?"
+                        type="Boolean"
+                        default="true"
+                        description="Display Home link of Navigation menu." />
+
+            <property   name="wrapperClass"
+                        label="Wrapping Class"
+                        type="String"
+                        description="CSS to apply on the wrapping component (e.g. for padding around links)" />
+            <property   name="listClass"
+                        label="List Class"
+                        type="String"
+                        description="CSS to apply on the ul or ol container when list mode is used" />
+
+            <property   name="isDebug"
+                        label="Show Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Display Debug information." />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>sfpegPageEditorTitle</fullName>
+        <categories>PEG Component LWC CMS Component Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Title displayed on the sfpegPageEditor component header</shortDescription>
+        <value>CMS Page Editor</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorHelp</fullName>
+        <categories>PEG Component LWC CMS Component Help</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Help message displayed on the sfpegPageEditor component header</shortDescription>
+        <value>Component to help you enter and update more easily some of the page fields with slightly technical content. You may switch each individual field in edit mode to update its value in the main Content Edit section. Please remember to save your changes before leaving the page.</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorTypeError</fullName>
+        <categories>PEG Component LWC CMS Component Error Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Errort message for the sfpegPageEditor component when Content is not sfpegPage</shortDescription>
+        <value>This component may be used only with sfpegPage Content Type records.</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorIconSection</fullName>
+        <categories>PEG Component LWC CMS Component Section Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Title of the Icon section of the sfpegPageEditor component</shortDescription>
+        <value>Icon</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorVariantSection</fullName>
+        <categories>PEG Component LWC CMS Component Section Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Title of the Variant section of the sfpegPageEditor component</shortDescription>
+        <value>Display Variant</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorSelectLabel</fullName>
+        <categories>PEG Component LWC CMS Component Input Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label of the selection input of the sfpegPageEditor component</shortDescription>
+        <value>Select a value</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorPagesSection</fullName>
+        <categories>PEG Component LWC CMS Component Section Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Title of the Related Pages section of the sfpegPageEditor component</shortDescription>
+        <value>Related Pages</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorLinksSection</fullName>
+        <categories>PEG Component LWC CMS Component Section Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Title of the Links section of the sfpegPageEditor component</shortDescription>
+        <value>Links</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorEditPagesLabel</fullName>
+        <categories>PEG Component LWC CMS Component Action Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label of the Update Pages action section of the sfpegPageEditor component</shortDescription>
+        <value>Update current pages</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorAddPageLabel</fullName>
+        <categories>PEG Component LWC CMS Component Action Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label of the Add Page action section in the sfpegPageEditor component</shortDescription>
+        <value>Add a page from the available ones</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorEditLinksLabel</fullName>
+        <categories>PEG Component LWC CMS Component Action Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label of the Update Links action section of the sfpegPageEditor component</shortDescription>
+        <value>Update current links</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorAddLinkLabel</fullName>
+        <categories>PEG Component LWC CMS Component Action Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label of the Add Link action section of the sfpegPageEditor component</shortDescription>
+        <value>Add a new link</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorEditTitle</fullName>
+        <categories>PEG Component LWC CMS Component Button Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Title of the Edit toggle button icons of the sfpegPageEditor component</shortDescription>
+        <value>Switch to Edit mode</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorCloseTitle</fullName>
+        <categories>PEG Component LWC CMS Component Button Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Title of the Close toggle button icons of the sfpegPageEditor component</shortDescription>
+        <value>Exit Edit mode</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorAddTitle</fullName>
+        <categories>PEG Component LWC CMS Component Button Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Title of the Add button icons of the sfpegPageEditor component</shortDescription>
+        <value>Add</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorRemoveTitle</fullName>
+        <categories>PEG Component LWC CMS Component Button Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Title of the Remove button icons of the sfpegPageEditor component</shortDescription>
+        <value>Remove</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorUpTitle</fullName>
+        <categories>PEG Component LWC CMS Component Button Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Title of the Move Up button icons of the sfpegPageEditor component</shortDescription>
+        <value>Move Up</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorDownTitle</fullName>
+        <categories>PEG Component LWC CMS Component Button Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Title of the Move Down button icons of the sfpegPageEditor component</shortDescription>
+        <value>Move Down</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorLabelInput</fullName>
+        <categories>PEG Component LWC CMS Component Input Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label of the Link Label Input of the sfpegPageEditor component</shortDescription>
+        <value>Label</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorTitleInput</fullName>
+        <categories>PEG Component LWC CMS Component Input Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label of the Link Title Input of the sfpegPageEditor component</shortDescription>
+        <value>Title</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorUrlInput</fullName>
+        <categories>PEG Component LWC CMS Component Input Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label of the Link URL Input of the sfpegPageEditor component</shortDescription>
+        <value>URL</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorUrlHelp</fullName>
+        <categories>PEG Component LWC CMS Component Input Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Help message of the Link URL Input of the sfpegPageEditor component</shortDescription>
+        <value>Please fill in a full https://xxx.yyy external URL or a relative /xxx/yyy internal URL</value>
+    </labels>
+    
+</CustomLabels>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ManagedContentType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Complex content type providing editorial content as well as link lists and related pages.</description>
+    <developerName>sfpegPage</developerName>
+    <managedContentNodeTypes>
+        <helpText>Title of the page</helpText>
+        <isLocalizable>false</isLocalizable>
+        <isRequired>true</isRequired>
+        <nodeLabel>Headline</nodeLabel>
+        <nodeName>Headline</nodeName>
+        <nodeType>NAMEFIELD</nodeType>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>Name of a small icon for summary lists</helpText>
+        <isLocalizable>false</isLocalizable>
+        <isRequired>false</isRequired>
+        <nodeLabel>Icon</nodeLabel>
+        <nodeName>Icon</nodeName>
+        <nodeType>TEXT</nodeType>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>Summary of the page content and purpose</helpText>
+        <isLocalizable>false</isLocalizable>
+        <isRequired>false</isRequired>
+        <nodeLabel>Summary</nodeLabel>
+        <nodeName>Summary</nodeName>
+        <nodeType>MTEXT</nodeType>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>Main editorial image (e.g. banner)</helpText>
+        <isLocalizable>false</isLocalizable>
+        <isRequired>false</isRequired>
+        <nodeLabel>Image</nodeLabel>
+        <nodeName>Image</nodeName>
+        <nodeType>IMG</nodeType>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>Main editorial content of the page</helpText>
+        <isLocalizable>false</isLocalizable>
+        <isRequired>false</isRequired>
+        <nodeLabel>Description</nodeLabel>
+        <nodeName>Description</nodeName>
+        <nodeType>RTE</nodeType>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>List of ContentKeys of related pages, as a JSON list like [&quot;key1&quot;,&quot;key2&quot;...]</helpText>
+        <isLocalizable>false</isLocalizable>
+        <isRequired>false</isRequired>
+        <nodeLabel>Related Pages</nodeLabel>
+        <nodeName>RelatedPages</nodeName>
+        <nodeType>MTEXT</nodeType>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>List of internal related links to be displayed, as a JSON like [{&quot;label&quot;:&quot;Link Label&quot;,&quot;title&quot;:&quot;link title&quot;,&quot;url&quot;:&quot;relative link url&quot;}...]</helpText>
+        <isLocalizable>false</isLocalizable>
+        <isRequired>false</isRequired>
+        <nodeLabel>Links</nodeLabel>
+        <nodeName>Links</nodeName>
+        <nodeType>MTEXT</nodeType>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>Display variant of the page</helpText>
+        <isLocalizable>false</isLocalizable>
+        <isRequired>false</isRequired>
+        <nodeLabel>Display Variant</nodeLabel>
+        <nodeName>DisplayVariant</nodeName>
+        <nodeType>TEXT</nodeType>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>Page Reference displaying the Content</helpText>
+        <isLocalizable>false</isLocalizable>
+        <isRequired>false</isRequired>
+        <nodeLabel>Target</nodeLabel>
+        <nodeName>Target</nodeName>
+        <nodeType>TEXT</nodeType>
+    </managedContentNodeTypes>
+    <masterLabel>Page</masterLabel>
+</ManagedContentType>

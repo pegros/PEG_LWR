@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>CMS Content List Display</masterLabel>
+    <description>SF PEG Component enabling to display a list of CMS Contents based on a stringified list of ContentKeys</description>
+    <targets>
+        <target>lightningCommunity__Default</target>  
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <capabilities>
+        <capability>lightning__dynamicComponent</capability>
+    </capabilities>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property   name="contentKeys"
+                        label="Content Keys"
+                        type="String"
+                        description="List of ContentKeys to display (as a JSON stringified string array)" />
+            <property   name="displayCmp"
+                        label="Display Component"
+                        type="String"
+                        description="Developer Name of the Component used to display children (as c/cmpName)" />
+            <property   name="displayConfig"
+                        label="Display Configuration"
+                        type="String"
+                        description="Properties to provide as input to the component for each content (as a stringified JSON object)" />
+
+            <property   name="wrappingCss"
+                        label="Wrapping Classes"
+                        type="String"
+                        description="CSS classes to apply to the main wrapping div" />
+            <property   name="contentCss"
+                        label="Content Classes"
+                        type="String"
+                        description="CSS classes to apply to the div wrapping each individual content component" />
+
+            <property   name="isDebug"
+                        label="Debug?"
+                        type="Boolean"
+                        description="Activate debug mode" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

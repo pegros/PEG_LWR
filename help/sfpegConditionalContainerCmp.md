@@ -55,7 +55,7 @@ These elements do not appear in the published LWR external site.
 
 ## Technical Details
 
-This component supports two layout slots as for **LWR Layout Components**(https://developer.salesforce.com/docs/atlas.en-us.exp_cloud_lwr.meta/exp_cloud_lwr/get_started_layout.htm) to define and configure
+This component supports two layout slots as for **[LWR Layout Components](https://developer.salesforce.com/docs/atlas.en-us.exp_cloud_lwr.meta/exp_cloud_lwr/get_started_layout.htm)** to define and configure
 the components respectively for the different criterias cases.
 * The invalid case section is displayed if and only if the `Show Default?` property is set to `true`
 (and if the condition is not met).

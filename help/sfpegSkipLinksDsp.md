@@ -67,6 +67,7 @@ For each **sfpegAnchorDsp** instance, the following properties are available:
 reevaluation when navigating to another page; there should be one per page)
 * `Show Debug?`: debug mode activation
 
+![Anchor Configuration](/media/sfpegAnchorConfig.png)
 
 
 

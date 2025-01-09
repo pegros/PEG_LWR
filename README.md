@@ -41,11 +41,11 @@ page while the rest of the page contains predefined data (e.g. filtered list of 
 
 ![CMS Content Display](/media/sfpegCmsContentDisplayCmp.png)
 
-#### [sfpegCmsRichtextDisplay](/help/sfpegCmsRichTextDisplay.md)
+#### [sfpegCmsRichtextDisplay](/help/sfpegCmsRichtextDisplay.md)
 This display component provides the ability to rework CMS richtext content 
 before actual display to bypass some URL and accessibility issues.
 
-![CMS Richtext Display](/media/sfpegCmsRichtextDisplay.png)
+![CMS Richtext Display](/media/sfpegCmsRichTextDisplay.png)
 
 #### [sfpegCmsListDisplay](/help/sfpegCmsListDisplay.md)
 This container component provides the ability to display CMS content via any LWC component

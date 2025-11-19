@@ -75,6 +75,9 @@ export default class SfpegCmsPageEditor extends LightningElement {
     isVariantEdit = false;
     isPageEdit = false;
     isLinkEdit = false;
+    isEditLinkModalOpen = false;
+    selectedLink = { label: '', title: '', url: '', target: '' };
+    selectedLinkIndex;
 
     //------------------------------------------------
     // Custom Labels
@@ -445,6 +448,17 @@ export default class SfpegCmsPageEditor extends LightningElement {
         this.applyChanges();
         console.log("handleMoveLinkDown: END / links update requested");
     }
+    handleEditLink(event){
+        console.log("handleEditLink: START with link ",event.target.value);
+        let linkIndex = this.links.findIndex(item => item.label == event.target.value);
+        console.log("handleEditLink: linkIndex found ",linkIndex);
+        this.isEditLinkModalOpen = !this.isEditLinkModalOpen;
+        console.log("handleEditLink: isEditLinkModalOpen Status: ",this.isEditLinkModalOpen);
+        console.log("handleEditLink: link params: ", JSON.stringify(this.links[linkIndex]));
+        this.selectedLink = {... this.links[linkIndex]};       
+        this.selectedLinkIndex = linkIndex;
+        console.log("handleEditLink: END / links update requested");
+    }
     handleRemoveLink(event){
         console.log("handleRemoveLink: START with link ",event.target.value);
 
@@ -488,6 +502,42 @@ export default class SfpegCmsPageEditor extends LightningElement {
 
         this.applyChanges();
         console.log("handleAddLink: END / Links update requested");
+    }
+    
+    closeEditLinkModal(event){
+        console.log("closeEditLinkModal: START with event",event);
+        this.isEditLinkModalOpen = !this.isEditLinkModalOpen;
+        console.log("closeEditLinkModal: isEditLinkModalOpen",this.isEditLinkModalOpen);
+        console.log("closeEditLinkModal: END ");
+    }
+
+    handleUpdateLink(event){
+        console.log("handleUpdateLink: START with event",event);
+        event.preventDefault();
+        console.log("handleUpdateLink: current links ",JSON.stringify(this.links));
+        let linkIndex = this.selectedLinkIndex;
+        console.log("handleUpdateLink: linkIndex: ",linkIndex);
+        let labelInput = this.refs.editModalLabel;
+        let titleInput = this.refs.editModalTitle;
+        let urlInput = this.refs.editModalURL;
+        // Sanity check: Guard against refs not being available
+        if (!labelInput || !titleInput || !urlInput) {
+            console.error('handleUpdateLink: Edit link Modal input references are not available.');
+            this.isEditLinkModalOpen = !this.isEditLinkModalOpen;
+            return;
+        }
+
+        let link2Update = {};    
+        link2Update["label"] = labelInput.value;
+        link2Update["title"] = titleInput.value;
+        link2Update["url"] = urlInput.value;
+        link2Update["target"] = (urlInput.value.startsWith('http') ? '_blank' : '_self');      
+        console.log("handleUpdateLink: link2Update: ",JSON.stringify(link2Update)); 
+        this.links[linkIndex] = link2Update;
+        console.log("handleUpdateLink: this.links after update: ",JSON.stringify(this.links)); 
+        this.applyChanges();
+        this.isEditLinkModalOpen = !this.isEditLinkModalOpen;
+        console.log("handleUpdateLink: END ");
     }
 
 

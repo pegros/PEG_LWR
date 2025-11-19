@@ -241,7 +241,27 @@
                 </template>
 
                 <div class="slds-p-horizontal_medium">
-                    <!-- Links Edit Mode Display -->
+                    <!-- START Edit Link modal -->
+                    <template if:true={isEditLinkModalOpen}>
+                        <div class="slds-modal slds-fade-in-open">
+                            <div class="slds-modal__container">
+                                <header class="slds-modal__header">
+                                    <h3 class="slds-text-heading_medium">Edit Link</h3>
+                                </header>
+                                <div class="slds-modal__content slds-p-around_medium">
+                                    <lightning-input type="text" name="label" required label={lblLabel} value={selectedLink.label} lwc:ref="editModalLabel"></lightning-input>
+                                    <lightning-input type="text" name="title" required label={lblTitle} value={selectedLink.title} lwc:ref="editModalTitle"></lightning-input>
+                                    <lightning-input type="text" name="url" required label={lblUrl} value={selectedLink.url} field-level-help={lblUrlHelp} lwc:ref="editModalURL"></lightning-input>
+                                </div>
+                                <footer class="slds-modal__footer">
+                                    <button class="slds-button slds-button_neutral" onclick={closeEditLinkModal}>Cancel</button>
+                                    <button class="slds-button slds-button_brand slds-m-left_small" onclick={handleUpdateLink}>Save</button>
+                                </footer>
+                            </div>
+                        </div>
+                        <div class="slds-backdrop slds-backdrop_open"></div>
+                    </template>
+                    <!-- End Edit Link modal -->
                     <template lwc:if={isLinkEdit}>
                         <lightning-layout multiple-rows="true" pull-to-boundary="small">
                             <lightning-layout-item padding="horizontal-small" size="12" medium-device-size="6">
@@ -266,6 +286,16 @@
                                                                                 size="small"
                                                                                 variant="bare"
                                                                                 onclick={handleMoveLinkUp} >
+                                                        </lightning-button-icon>
+                                                    </div>
+                                                    <div class="slds-col">
+                                                        <lightning-button-icon  icon-name="utility:edit"
+                                                                                icon-class="slds-text-color_default"
+                                                                                value={iterLink.label}
+                                                                                title={lblEdit}
+                                                                                size="small"
+                                                                                variant="bare"
+                                                                                onclick={handleEditLink} >
                                                         </lightning-button-icon>
                                                     </div>
                                                     <div class="slds-col">

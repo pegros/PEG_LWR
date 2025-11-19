@@ -33,7 +33,27 @@
             <ul class={listClass} >
                 <template for:each={menuItems} for:item="item">
                     <li key={item.label}>
-                        <a href="#" data-value={item.label} tabindex="0" title={item.title} onclick={handleLinkClick}>{item.label}</a>
+                        <template lwc:if={item.isLink}>
+                            <a href="#" data-value={item.label} tabindex="0" title={item.title} onclick={handleLinkClick}>{item.label}</a>
+                        </template>
+                        <template lwc:else> 
+                            {item.label} 
+                        </template>                        
+                        <!-- Submenu for MenuLabel items -->
+                        <template if:true={item.hasChildren}>
+                            <ul class={listClass}>
+                                <template for:each={item.children} for:item="child">
+                                    <li key={child.label}>
+                                        <template lwc:if={child.isLink}>
+                                            <a href="#" data-value={child.label} tabindex="0" title={child.title} onclick={handleLinkClick}>{child.label}</a>
+                                        </template>
+                                        <template lwc:else> 
+                                            {child.label} 
+                                        </template>
+                                    </li>
+                                </template>
+                            </ul>
+                        </template>
                     </li>
                 </template>
             </ul>
@@ -46,7 +66,27 @@
             <ol class={listClass}>
                 <template for:each={menuItems} for:item="item">
                     <li key={item.label}>
-                        <a href="#" data-value={item.label} tabindex="0" title={item.title} onclick={handleLinkClick}>{item.label}</a>
+                        <template lwc:if={item.isLink}>
+                            <a href="#" data-value={item.label} tabindex="0" title={item.title} onclick={handleLinkClick}>{item.label}</a>
+                        </template>
+                        <template lwc:else> 
+                            {item.label} 
+                        </template>
+                        <!-- Submenu for MenuLabel items -->
+                        <template if:true={item.hasChildren}>
+                            <ul class={listClass}>
+                                <template for:each={item.children} for:item="child">
+                                    <li key={child.label}>
+                                        <template lwc:if={child.isLink}>
+                                            <a href="#" data-value={child.label} tabindex="0" title={child.title} onclick={handleLinkClick}>{child.label}</a>
+                                        </template>
+                                        <template lwc:else> 
+                                            {child.label} 
+                                        </template>
+                                    </li>
+                                </template>
+                            </ul>
+                        </template>
                     </li>
                 </template>
             </ol>

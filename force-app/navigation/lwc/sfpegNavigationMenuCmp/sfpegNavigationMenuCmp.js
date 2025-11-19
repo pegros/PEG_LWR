@@ -111,12 +111,36 @@ export default class SfpegNavigationMenuCmp extends NavigationMixin(LightningEle
                 if (this.isDebug) console.log('wiredMenu: processing menu item ',item);
                 let newItem = {... item};
                 newItem.labelOrig = item.label;
-                //newItem.title = this.titlePrefix + ' ' + this.navLabel;
-                newItem.title = this.titlePrefix + ' ' + item.label;
+                newItem.title = this.titlePrefix + ' ' + newItem.label;
+                newItem.hasChildren = false;
+                newItem.children = [];
+                newItem.isLink = true;
 
                 if (newItem.label?.includes('&')) {
                     if (this.isDebug) console.log('wiredHeaderMenus: unescaping label');
                     newItem.label = this.htmlDecode(newItem.label);
+                }
+                if (newItem.actionValue === null) {
+                     newItem.isLink = false;
+                }
+                // Process submenu items
+                if (item.subMenu && item.subMenu.length > 0) {
+                    newItem.hasChildren = true;
+                    item.subMenu.forEach(subItem => {
+                        let childItem = { ...subItem };
+                        childItem.labelOrig = subItem.label;
+                        childItem.title = this.titlePrefix + ' ' + childItem.label;
+                        childItem.isChild = true;
+                        childItem.isLink = true;
+                        
+                        if (childItem.label?.includes('&')) {
+                            childItem.label = this.htmlDecode(childItem.label);
+                        }
+                        if (childItem.actionValue === null) {
+                            childItem.isLink = false;
+                        }                        
+                        newItem.children.push(childItem);
+                    });
                 }
                 menuItems.push(newItem);
             });

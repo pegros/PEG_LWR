@@ -105,6 +105,8 @@ dist
 
 force-app/main/default
 force-app/test
+test/
+Deployment.md
 
 .sf/
 .sfdx/

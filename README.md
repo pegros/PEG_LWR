@@ -139,9 +139,18 @@ It also enables to precisely the exact items to include in the skip links compon
 
 ## Technical Details
 
+### Dependencies
+
+⚠️ The **[sfpegConditionalSectionCmp](/help/sfpegConditionalSectionCmp.md)** component in this package
+requires the **[sfpegList-core](https://github.com/pegros/PEG_LIST/blob/master/help/sfpegListPkgCore.md)**
+unlocked package.
+
 ### Quick Full Deployment
 
-For a quick and easy deployment, you may use the following deploy button
+ℹ️ For the time being, there is a limitation with the **ConnectApi** Apex class that prevents
+the creation and publication of the components of this repository as **unclocked packages**.
+
+For a quick and easy deployment, you may use still the following deploy button
 leveraging the **[GitHub Salesforce Deploy Tool](https://github.com/afawcett/githubsfdeploy)**
 implemented by [Andrew Fawcett](https://andyinthecloud.com/2013/09/24/deploy-direct-from-github-to-salesforce/).
 
@@ -152,15 +161,15 @@ To deploy only the whole package to your Org, you may use the following button.
        src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
 </a>
 
-
 ### Unitary Deployment
 
 Components have been grouped by use case and, leveraging the **Salesforce CLI**, it is 
 quite easy to deploy the components you actually need via targeted deploy commands
-on the proper source sub-folders.
+on the proper source **force-app/default/** sub-folders.
 
 Please refer to the following documentation for help.
 * [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
 * [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
 * [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
 * [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+

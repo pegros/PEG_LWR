@@ -1,6 +1,6 @@
 <template>
     <!-- Tab Set Mode Display -->
-    <template if:true={isTabset}>
+    <template lwc:if={isTabset}>
         <lightning-tabset   role="navigation"   class={wrapperClass}
                             variant="standard"  title="Navigation"
                             active-tab-value={currentTab} >
@@ -8,71 +8,135 @@
                 <lightning-tab  key={item.id}       value={item.label}
                                 label={item.label}  class="sfpegHideTab"
                                 onactive={handleTabActive}>
-                    <!--<p class="sfpegHideTab"></p>-->
                 </lightning-tab>
             </template>
         </lightning-tabset>
     </template>
 
     <!-- Horizontal Link List Display -->
-    <template if:true={isHList}>
+    <template lwc:elseif={isHList}>
         <nav role="navigation" class={wrapperClass} title="Navigation">
             <ul class="slds-list_horizontal slds-has-dividers_left slds-listbox slds-listbox_horizontal">
                 <template for:each={menuItems} for:item="item">
-                    <li key={item.label} class="slds-item">
-                        <a href="#" data-value={item.label} tabindex="0" title={item.title} onclick={handleLinkClick}>{item.label}</a>
-                    </li>
+                    <template lwc:if={item.isLink}>
+                        <li key={item.label} class="slds-item">
+                            <a  href="#" data-value={item.label} tabindex="0" title={item.title}
+                                onclick={handleLinkClick}>{item.label}</a>
+                        </li>
+                    </template>
+                    <template lwc:elseif={item.subMenu}>
+                        <li key={item.label} class="slds-item">
+                            <lightning-button-menu  label={item.label} alternative-text={item.label}
+                                                    variant="bare" onselect={handleMenuSelect}  >
+                                <template for:each={item.subMenu} for:item="childItem">
+                                    <lightning-menu-item key={childItem.label} label={childItem.label} value={childItem.fullId}>
+                                    </lightning-menu-item>
+                                </template>
+                            </lightning-button-menu>
+                        </li>
+                    </template>
+                    <template lwc:else>
+                        <li key={item.label} class="slds-item">
+                            <span class="slds-text-color_default">{item.label}</span>
+                        </li>
+                    </template>
                 </template>
             </ul>
         </nav>
     </template>
 
     <!-- Vertical Link List Display -->
-    <template if:true={isVList}>
+    <template lwc:elseif={isVList}>
         <nav role="navigation" class={wrapperClass} title="Navigation">
             <ul class={listClass} >
                 <template for:each={menuItems} for:item="item">
-                    <li key={item.label}>
-                        <a href="#" data-value={item.label} tabindex="0" title={item.title} onclick={handleLinkClick}>{item.label}</a>
-                    </li>
+                    <template lwc:if={item.isLink}>
+                        <li key={item.label}>
+                            <a  href="#" data-value={item.label} tabindex="0" title={item.title}
+                                onclick={handleLinkClick}>{item.label}</a>
+                        </li>
+                    </template>
+                    <template lwc:elseif={item.subMenu}>
+                        <li key={item.label}><span class="slds-text-color_default">{item.label}</span>
+                            <ul class={sublistClass}>
+                                <template for:each={item.subMenu} for:item="childItem">
+                                    <li key={childItem.label}>
+                                        <template lwc:if={childItem.isLink}>
+                                            <a  href="#" data-value={childItem.fullId} tabindex="0" title={childItem.title}
+                                                onclick={handleLinkClick}>{childItem.label}</a>
+                                        </template>
+                                        <template lwc:else> 
+                                            <li key={childItem.label}><span class="slds-text-color_default">{childItem.label}</span></li>
+                                        </template>
+                                    </li>
+                                </template>
+                            </ul>
+                        </li>
+                    </template>
+                    <template lwc:else>
+                        <li key={item.label}><span class="slds-text-color_default">{item.label}</span></li>
+                    </template>
                 </template>
             </ul>
         </nav>
     </template>
 
     <!-- Vertical Link List Display -->
-    <template if:true={isOList}>
+    <template lwc:elseif={isOList}>
         <nav role="navigation" class={wrapperClass} title="Navigation">
             <ol class={listClass}>
                 <template for:each={menuItems} for:item="item">
-                    <li key={item.label}>
-                        <a href="#" data-value={item.label} tabindex="0" title={item.title} onclick={handleLinkClick}>{item.label}</a>
-                    </li>
+                    <template lwc:if={item.isLink}>
+                        <li key={item.label}>
+                            <a  href="#" data-value={item.label} tabindex="0" title={item.title}
+                                onclick={handleLinkClick}>{item.label}</a>
+                        </li>
+                    </template>
+                    <template lwc:elseif={item.subMenu}>
+                        <li key={item.label}><span class="slds-text-color_default">{item.label}</span>
+                            <ol class={sublistClass}>
+                                <template for:each={item.subMenu} for:item="childItem">
+                                    <li key={childItem.label}>
+                                        <template lwc:if={childItem.isLink}>
+                                            <a  href="#" data-value={childItem.fullId} tabindex="0" title={childItem.title}
+                                                onclick={handleLinkClick}>{childItem.label}</a>
+                                        </template>
+                                        <template lwc:else> 
+                                            <li key={childItem.label}><span class="slds-text-color_default">{childItem.label}</span></li>
+                                        </template>
+                                    </li>
+                                </template>
+                            </ol>
+                        </li>
+                    </template>
+                    <template lwc:else>
+                        <li key={item.label} class="slds-text-color_default">{item.label}</li>
+                    </template>
                 </template>
             </ol>
         </nav>
     </template>
 
     <!-- Error Display -->
-    <div if:true={errorMessage} class="slds-box slds-box_small slds-theme_default slds-media slds-media_center">
-        <div class="slds-media__figure">
-            <lightning-icon icon-name="utility:error"   size="x-small"    variant="error">
-            </lightning-icon>
+    <template lwc:if={errorMessage}>
+        <div  class="slds-box slds-box_small slds-theme_default slds-media slds-media_center">
+            <div class="slds-media__figure">
+                <lightning-icon icon-name="utility:error"   size="x-small"    variant="error">
+                </lightning-icon>
+            </div>
+            <div class="slds-media__body">
+                <lightning-formatted-text   value={errorMessage}    class="slds-text-color_error">
+                </lightning-formatted-text>
+            </div>
         </div>
-        <div class="slds-media__body">
-            <lightning-formatted-text   value={errorMessage}    class="slds-text-color_error">
-            </lightning-formatted-text>
-        </div>
-    </div>
+    </template>
     
     <!-- Debug Information Display -->
-    <template if:true={isDebug}>
+    <template lwc:if={isDebug}>
         <div class="slds-box slds-box_small slds-theme_default slds-m-top_x-small"  >
             <dl class="slds-dl_horizontal">
                 <dt class="slds-dl_horizontal__label slds-truncate">Configuration:</dt>
                 <dd class="slds-dl_horizontal__detail">Menu: {navLabel} / Show Home? {showHome} / Mode: {displayMode} / Current Tab: {currentTab}</dd>
-                <!--<dt class="slds-dl_horizontal__label slds-truncate">Menu Items:</dt>
-                <dd class="slds-dl_horizontal__detail">{menuItemsString}</dd>-->
                 <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
                 <dd class="slds-dl_horizontal__detail">
                     <lightning-formatted-url    value="https://github.com/pegros/PEG_LWR/blob/master/help/sfpegNavigationMenuCmp.md"
@@ -83,19 +147,4 @@
             </dl>
         </div>
     </template>
-
-    <!--
-        <div class="navbar slds-border_bottom">
-            <nav role="navigation" class="slds-align_absolute-center">
-                <ul class="slds-list_horizontal slds-has-dividers_left slds-listbox slds-listbox_horizontal">
-                   <template for:each={menuItems} for:item="item">
-                       <li key={item.id} class="slds-item">
-                           <c-navigation-menu-item item={item}></c-navigation-menu-item>
-                       </li>
-                   </template>
-               </ul>
-           </nav>
-        </div>
-    </template>
-    -->
 </template>

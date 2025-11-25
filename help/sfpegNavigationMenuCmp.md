@@ -19,7 +19,7 @@ _Navigation Menu as Tabs_
 ![Navigation Menu](/media/sfpegNavigationMenuOL.png)
 _Navigation Menu as Ordered List_
 
-
+ℹ️ Navigation sub-menus are supported for all display options but `tabs`
 
 
 ## Site Builder Configuration

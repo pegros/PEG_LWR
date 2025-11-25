@@ -55,6 +55,7 @@ export default class SfpegNavigationMenuCmp extends NavigationMixin(LightningEle
     // Contextual Parameters
     //-----------------------------------
     currentUserId = userId;    
+    sublistClass;
 
     //----------------------------------------------------------------
     // Internal Initialization Parameters
@@ -97,6 +98,7 @@ export default class SfpegNavigationMenuCmp extends NavigationMixin(LightningEle
         else if (this.isOList) {
             this.listClass = this.listClass || 'slds-list_ordered';
         }
+        this.sublistClass = this.listClass + ' slds-is-nested';
         if (this.isDebug) console.log('connected: END NavigationMenu');
     }
 
@@ -111,12 +113,29 @@ export default class SfpegNavigationMenuCmp extends NavigationMixin(LightningEle
                 if (this.isDebug) console.log('wiredMenu: processing menu item ',item);
                 let newItem = {... item};
                 newItem.labelOrig = item.label;
-                //newItem.title = this.titlePrefix + ' ' + this.navLabel;
                 newItem.title = this.titlePrefix + ' ' + item.label;
-
+                newItem.isLink = !(item.actionValue === null);
                 if (newItem.label?.includes('&')) {
                     if (this.isDebug) console.log('wiredHeaderMenus: unescaping label');
                     newItem.label = this.htmlDecode(newItem.label);
+                }
+                if (item.subMenu && item.subMenu.length > 0) {
+                    if (this.isDebug) console.log('wiredHeaderMenus: processing submenu');
+                    newItem.subMenu = [];
+                    item.subMenu.forEach(subItem => {
+                        if (this.isDebug) console.log('wiredMenu: processing submenu item ',subItem);
+                        let newSubItem = {... subItem};
+                        newSubItem.labelOrig = subItem.label;
+                        newSubItem.title = this.titlePrefix + ' ' + subItem.label;
+                        newSubItem.isLink = !(subItem.actionValue === null);
+                        if (newSubItem.label?.includes('&')) {  
+                            if (this.isDebug) console.log('wiredHeaderMenus: unescaping label');
+                            newItem.label = this.htmlDecode(newItem.label);
+                        }
+                        newSubItem.fullId = item.label + "###" + subItem.label;
+                        newItem.subMenu.push(newSubItem);
+                    });
+                    if (this.isDebug) console.log('wiredHeaderMenus: submenu registered',JSON.stringify(newItem.subMenu));
                 }
                 menuItems.push(newItem);
             });
@@ -194,12 +213,11 @@ export default class SfpegNavigationMenuCmp extends NavigationMixin(LightningEle
         event.stopPropagation();
         event.preventDefault();
 
-        //if (this.isDebug) console.log('handleLinkClick: event target ',event.target);
-        //if (this.isDebug) console.log('handleLinkClick: event target value ',event.target.getAttribute('data-value'));
-        const selectedLink = event.target.dataset.value;
+       const selectedLink = event.target.dataset.value;
         if (this.isDebug) console.log('handleLinkClick: selectedLink identified ',selectedLink);
 
-        const selectedItem = this.menuItems.find(item => item.label === selectedLink);
+        this.doNavigate(selectedLink);
+        /*const selectedItem = this.menuItems.find(item => item.label === selectedLink);
         if (this.isDebug) console.log('handleLinkClick: selectedItem found ',JSON.stringify(selectedItem));
 
         const pageRef = {
@@ -210,8 +228,18 @@ export default class SfpegNavigationMenuCmp extends NavigationMixin(LightningEle
         };
         if (this.isDebug) console.log('handleLinkClick: pageRef prepared ',JSON.stringify(pageRef));
 
-        this[NavigationMixin.Navigate](pageRef);
+        this[NavigationMixin.Navigate](pageRef);*/
         if (this.isDebug) console.log('handleLinkClick: END NavigationMenu / Navigation triggered');
+    }
+    handleMenuSelect(event){
+        if (this.isDebug) console.log('handleMenuSelect: START NavigationMenu ',this.navLabel);
+        if (this.isDebug) console.log('handleMenuSelect: event received ',event);
+        event.stopPropagation();
+        event.preventDefault();
+        const selectedLink = event.detail.value;
+        if (this.isDebug) console.log('handleMenuSelect: selectedLink identified ',selectedLink);
+        this.doNavigate(selectedLink);
+        if (this.isDebug) console.log('handleMenuSelect: END NavigationMenu ',this.navLabel);
     }
 
     //----------------------------------------------------------------
@@ -224,5 +252,42 @@ export default class SfpegNavigationMenuCmp extends NavigationMixin(LightningEle
         let result = doc.documentElement.textContent;
         if (this.isDebug) console.log('htmlDecode: END with ',result);
         return result;
+    }
+
+    doNavigate = function(linkId) {
+        if (this.isDebug) console.log('doNavigate: START with ',linkId);
+
+        let selectedItem;
+        if (linkId.includes("###")) {
+            const parts = linkId.split("###");
+            const parentLabel = parts[0];
+            const childLabel = parts[1];
+            if (this.isDebug) console.log('doNavigate: searching parent ',parentLabel);
+            const selectedParent = this.menuItems.find(item => item.label === parentLabel);
+            if (selectedParent) {
+                if (this.isDebug) console.log('doNavigate: searching child ',childLabel);
+                selectedItem = selectedParent.subMenu.find(item => item.label === childLabel);
+            }
+            else {
+                console.warn('doNavigate: parent menu not found ',linkId);
+                return;
+            }
+        }
+        else {
+            if (this.isDebug) console.log('doNavigate: searching link ',linkId);
+            selectedItem = this.menuItems.find(item => item.label === linkId);
+        }
+        if (this.isDebug) console.log('doNavigate: selectedItem found ',JSON.stringify(selectedItem));
+
+        const pageRef = {
+            type: 'standard__webPage',
+            attributes: {
+                url: selectedItem.actionValue
+            }
+        };
+        if (this.isDebug) console.log('doNavigate: pageRef prepared ',JSON.stringify(pageRef));
+
+        this[NavigationMixin.Navigate](pageRef);
+        if (this.isDebug) console.log('doNavigate: END');
     }
 }

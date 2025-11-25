@@ -52,11 +52,14 @@ import SELECT_ACTION    from '@salesforce/label/c.sfpegPageEditorSelectLabel';
 import ADD_PAGE_ACTION  from '@salesforce/label/c.sfpegPageEditorAddPageLabel';
 import EDIT_PAGE_ACTION from '@salesforce/label/c.sfpegPageEditorEditPagesLabel';
 import ADD_LINK_ACTION  from '@salesforce/label/c.sfpegPageEditorAddLinkLabel';
+import UPD_LINK_ACTION  from '@salesforce/label/c.sfpegPageEditorUpdateLinkLabel';
 import EDIT_LINK_ACTION from '@salesforce/label/c.sfpegPageEditorEditLinksLabel';
 import EDIT_TITLE       from '@salesforce/label/c.sfpegPageEditorEditTitle';
 import CLOSE_TITLE      from '@salesforce/label/c.sfpegPageEditorCloseTitle';
 import ADD_TITLE        from '@salesforce/label/c.sfpegPageEditorAddTitle';
 import REMOVE_TITLE     from '@salesforce/label/c.sfpegPageEditorRemoveTitle';
+import UPDATE_TITLE     from '@salesforce/label/c.sfpegPageEditorUpdateTitle';
+import CANCEL_TITLE     from '@salesforce/label/c.sfpegPageEditorCancelTitle';
 import UP_TITLE         from '@salesforce/label/c.sfpegPageEditorUpTitle';
 import DOWN_TITLE       from '@salesforce/label/c.sfpegPageEditorDownTitle';
 import LABEL_INPUT      from '@salesforce/label/c.sfpegPageEditorLabelInput';
@@ -75,6 +78,7 @@ export default class SfpegCmsPageEditor extends LightningElement {
     isVariantEdit = false;
     isPageEdit = false;
     isLinkEdit = false;
+    updatedLink;
 
     //------------------------------------------------
     // Custom Labels
@@ -90,11 +94,14 @@ export default class SfpegCmsPageEditor extends LightningElement {
     lblAddPage =    ADD_PAGE_ACTION;
     lblManagePages= EDIT_PAGE_ACTION;
     lblAddLink =    ADD_LINK_ACTION;
+    lblUpdateLink = UPD_LINK_ACTION;
     lblManageLinks= EDIT_LINK_ACTION;
     lblEdit =       EDIT_TITLE;
     lblClose =      CLOSE_TITLE;
     lblAdd =        ADD_TITLE;
     lblRemove =     REMOVE_TITLE;
+    lblUpdate =     UPDATE_TITLE;
+    lblCancel =     CANCEL_TITLE;
     lblUp =         UP_TITLE;
     lblDown =       DOWN_TITLE;
     lblLabel =      LABEL_INPUT;
@@ -489,7 +496,59 @@ export default class SfpegCmsPageEditor extends LightningElement {
         this.applyChanges();
         console.log("handleAddLink: END / Links update requested");
     }
+    handleEditLink(event){
+        console.log("handleEditLink: START with event",event);
+        event.preventDefault();
+        /*console.log("handleEditLink: srcElement",event.srcElement);
+        console.log("handleEditLink: srcElement.parentElement",event.srcElement?.parentElement);
+        console.log("handleEditLink: srcElement.parentElement.parentElement",event.srcElement?.parentElement?.parentElement);
+        console.log("handleEditLink: srcElement.parentElement.parentElement.parentElement",event.srcElement?.parentElement?.parentElement?.parentElement);*/
+        console.log("handleEditLink: srcElement.parentElement.parentElement.parentElement.parentElement",event.srcElement?.parentElement?.parentElement?.parentElement?.parentElement);
+        console.log("handleEditLink: selecting link class ",event.srcElement?.parentElement?.parentElement?.parentElement?.parentElement?.class);
 
+        console.log("handleEditLink: updating link ",event.target.value);
+        this.updatedLink = this.links.find(item => item.label == event.target.value);
+        console.log("handleEditLink: updatedLink found ",JSON.stringify(this.updatedLink));
+
+        let linkDivs = this.template.querySelectorAll('.linkDiv');
+        console.log('handleEditLink: #linkDivs found',linkDivs.length);
+        linkDivs.forEach(divItem => {
+            if (this.isDebug) console.log('handleEditLink: processing divItem',divItem);
+            if (this.isDebug) console.log('handleEditLink: processing div',divItem.dataset?.name);
+            if (divItem.dataset?.name == this.updatedLink.label) divItem.classList.add("slds-theme_info");
+            else divItem.classList.remove("slds-theme_info");
+        }); 
+        console.log('handleEditLink: linkDivs classes reset',linkDivs);
+
+        console.log("handleEditLink: END");
+    }
+    handleCancelLink(event) {
+        console.log("handleCancelLink: START with event",event);
+        this.resetLinkSelection();
+        console.log("handleCancelLink: END");
+    }
+    handleUpdateLink(event){
+        console.log("handleUpdateLink: START with event",event);
+        event.preventDefault();
+        console.log("handleUpdateLink: current updatedLink ",JSON.stringify(this.updatedLink));
+
+        let inputFields = this.template.querySelectorAll('lightning-input');
+        console.log("handleUpdateLink: inputFields fetched ",inputFields);
+
+        inputFields.forEach(item => {
+            console.log("handleUpdateLink: processing inputField ",item);
+            console.log("handleUpdateLink: with name ",item.name);
+            this.updatedLink[item.name] = item.value;
+        });
+        console.log("handleUpdateLink: updatedLink updated ",JSON.stringify(this.updatedLink));
+
+        console.log("handleUpdateLink: links updated ",JSON.stringify(this.links));
+
+        this.resetLinkSelection();
+
+        this.applyChanges();
+        console.log("handleUpdateLink: END / Links update requested");
+    }
 
     //------------------------------------------------
     // Utilities
@@ -518,4 +577,16 @@ export default class SfpegCmsPageEditor extends LightningElement {
         });
         console.log("applyChanges: change propagation requested");
     }
+
+    resetLinkSelection = () => {
+        console.log("resetLinkSelection: START");
+
+        this.updatedLink = null;
+        let linkDivs = this.template.querySelectorAll('.linkDiv.slds-theme_info');
+        console.log('resetLinkSelection: #active linkDivs found',linkDivs.length);
+        linkDivs.forEach(divItem => {
+            divItem.classList.remove("slds-theme_info");
+        }); 
+        console.log("handleEditLink: END / linkDivs reset");
+    }  
 }

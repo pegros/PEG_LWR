@@ -89,6 +89,14 @@
         <value>Update current links</value>
     </labels>
     <labels>
+        <fullName>sfpegPageEditorUpdateLinkLabel</fullName>
+        <categories>PEG Component LWC CMS Component Action Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label of the Update Link action section of the sfpegPageEditor component</shortDescription>
+        <value>Update existing link</value>
+    </labels>
+    <labels>
         <fullName>sfpegPageEditorAddLinkLabel</fullName>
         <categories>PEG Component LWC CMS Component Action Label</categories>
         <language>en_US</language>
@@ -127,6 +135,22 @@
         <protected>false</protected>
         <shortDescription>Title of the Remove button icons of the sfpegPageEditor component</shortDescription>
         <value>Remove</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorUpdateTitle</fullName>
+        <categories>PEG Component LWC CMS Component Button Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Title of the Update button icons of the sfpegPageEditor component</shortDescription>
+        <value>Update</value>
+    </labels>
+    <labels>
+        <fullName>sfpegPageEditorCancelTitle</fullName>
+        <categories>PEG Component LWC CMS Component Button Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Title of the Cancel button of the sfpegPageEditor component</shortDescription>
+        <value>Cancel</value>
     </labels>
     <labels>
         <fullName>sfpegPageEditorUpTitle</fullName>

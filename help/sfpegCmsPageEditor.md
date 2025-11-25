@@ -119,7 +119,7 @@ with the exact list of possible icon names to choose from.
 As this list may be long, it has to be provided via a simple JSON static resource
 listing all possible names in stringified array, e.g.
 ```
-["Icon #1","Icon #2","Icon #3",,"Icon #4"]
+["Icon #1","Icon #2","Icon #3","Icon #4"]
 ```
 
 The name of this static resource then needs to be registered in the 
@@ -138,6 +138,15 @@ Its value should be a stringified JSON array of the possible values, e.g.
 
 This property is optional, no value being available for selection in the component
 if not set.
+
+
+### Custom Setting Configuration Example
+
+With the 2 static resources provided by default for test class execution (i.e.
+`sfpegPageEditorTestNames` and `sfpegPageEditorTestIcons`), the following
+snapshot provides an example of the **sfpegPageSettings** custom setting configuration.
+
+![Custom Setting Configuration Example](/media/sfpegCmsPageEditorSetupExample.png)
 
 
 ## Technical Details

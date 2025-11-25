@@ -124,10 +124,10 @@ public class  sfpegCmsPageEditor_TST {
         System.debug('testGetIconNames: Test #2 - Missing Static resource');
 
         sfpegPageSettings__c pageSettings = new sfpegPageSettings__c();
-        pageSettings.IconExtension__c = '.svg';
-        pageSettings.IconNameResource__c = 'IconNames';
-        pageSettings.IconFilesResource__c = 'IconFiles';
-        pageSettings.IconPath__c = '/test/';
+        pageSettings.IconExtension__c = '.png';
+        pageSettings.IconNameResource__c = 'sfpegPageEditorTestIcons';
+        pageSettings.IconFilesResource__c = 'DummyIconNamesRsc';
+        pageSettings.IconPath__c = '/';
         insert pageSettings;
 		System.debug('testGetIconNames: pageSettings custom setting inserted ' + pageSettings);
 
@@ -143,14 +143,14 @@ public class  sfpegCmsPageEditor_TST {
         // Case #3 - Passing case
         System.debug('testGetIconNames: Test #3 - Passing case');
 
-        pageSettings.IconNameResource__c = 'sfpegPageEditorTest';
+        pageSettings.IconNameResource__c = 'sfpegPageEditorTestNames';
         update pageSettings;
 		System.debug('testGetIconNames: pageSettings custom setting updated ' + pageSettings);
 
         try {
             List<Object> iconList = sfpegCmsPageEditor_CTL.getIconNames();
             System.debug('testGetIconNames: icon names properly fetched' + iconList);
-            Assert.areEqual(2,iconList.size(),'2 icon names should be returned');
+            Assert.areEqual(9,iconList.size(),'9 icon names should be returned');
         }
         catch(Exception error){
             System.debug('testGetIconNames: Exception raised' + error);

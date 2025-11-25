@@ -249,7 +249,8 @@
                                 <template lwc:if={links}>
                                     <p class="slds-text-title slds-text-color_destructive slds-m-top_small">{lblManageLinks}</p>
                                     <template for:each={links} for:item="iterLink">
-                                        <div class="slds-box slds-box_x-small slds-media slds-m-vertical_x-small" key={iterLink.label}>
+                                        <div class="slds-box slds-box_x-small slds-media slds-m-vertical_x-small linkDiv"
+                                                data-name={iterLink.label} key={iterLink.label}>
                                             <div class="slds-media__body">
                                                 <a class="slds-text-body_regular" href="#" title={iterLink.title}>
                                                     <span>{iterLink.label}</span>
@@ -269,6 +270,14 @@
                                                         </lightning-button-icon>
                                                     </div>
                                                     <div class="slds-col">
+                                                        <lightning-button-icon  icon-name="utility:edit"
+                                                                                class="slds-m-right_x-small"
+                                                                                value={iterLink.label}
+                                                                                title={lblUpdate}
+                                                                                size="small"
+                                                                                variant="bare"
+                                                                                onclick={handleEditLink} >
+                                                        </lightning-button-icon>
                                                         <lightning-button-icon  icon-name="utility:delete"
                                                                                 icon-class="slds-text-color_destructive"
                                                                                 value={iterLink.label}
@@ -294,21 +303,47 @@
                                 </template>
                             </lightning-layout-item>
                             <lightning-layout-item padding="horizontal-small" size="12" medium-device-size="6">
-                                <form class="slds-m-top_medium" lwc:ref="linkForm" onsubmit={handleAddLink}>
-                                    <p class="slds-text-title slds-text-color_destructive slds-m-top_medium">{lblAddLink}</p>
-                                    <lightning-input    type="text" name="label" required label={lblLabel}></lightning-input>
-                                    <lightning-input    type="text" name="title" required label={lblTitle}></lightning-input>
-                                    <lightning-input    type="text" name="url"   required label={lblUrl}
-                                                        field-level-help={lblUrlHelp}></lightning-input>
+                                <template lwc:if={updatedLink}>
+                                    <form class="slds-m-top_medium slds-box slds-theme_shade" lwc:ref="linkForm" onsubmit={handleUpdateLink}>
+                                        <p class="slds-text-title slds-text-color_destructive slds-m-small_medium">{lblUpdateLink}</p>
+                                        <lightning-input    type="text" name="label" value={updatedLink.label} required label={lblLabel}></lightning-input>
+                                        <lightning-input    type="text" name="title" value={updatedLink.title} required label={lblTitle}></lightning-input>
+                                        <lightning-input    type="text" name="url"   value={updatedLink.url} required label={lblUrl}
+                                                            field-level-help={lblUrlHelp}></lightning-input>
                         
-                                    <lightning-button   class="slds-align_absolute-center slds-m-top_small" 
-                                                        icon-name="utility:new"
-                                                        label={lblAdd}
-                                                        size="small"
-                                                        variant="destructive-text"
-                                                        type="submit" >
-                                    </lightning-button>                        
-                                </form>
+                                        <lightning-button-group class="slds-align_absolute-center slds-m-top_small">
+                                            <lightning-button   icon-name="utility:close"
+                                                                label={lblCancel}
+                                                                size="small"
+                                                                variant="neutral"
+                                                                onclick={handleCancelLink} >
+                                            </lightning-button>
+                                            <lightning-button   icon-name="utility:check"
+                                                                label={lblUpdate}
+                                                                size="small"
+                                                                variant="destructive-text"
+                                                                type="submit" >
+                                            </lightning-button>       
+                                        </lightning-button-group>                 
+                                    </form>
+                                </template>
+                                <template lwc:else>
+                                 <form class="slds-m-top_medium slds-box" lwc:ref="linkForm" onsubmit={handleAddLink}>
+                                        <p class="slds-text-title slds-text-color_destructive slds-m-small_medium">{lblAddLink}</p>
+                                        <lightning-input    type="text" name="label" required label={lblLabel}></lightning-input>
+                                        <lightning-input    type="text" name="title" required label={lblTitle}></lightning-input>
+                                        <lightning-input    type="text" name="url"   required label={lblUrl}
+                                                            field-level-help={lblUrlHelp}></lightning-input>
+                        
+                                        <lightning-button   class="slds-align_absolute-center slds-m-top_small" 
+                                                            icon-name="utility:new"
+                                                            label={lblAdd}
+                                                            size="small"
+                                                            variant="destructive-text"
+                                                            type="submit" >
+                                        </lightning-button>                        
+                                    </form>
+                                </template>
                             </lightning-layout-item>
                         </lightning-layout>
                     </template>

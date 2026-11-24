@@ -1,6 +1,5 @@
 # ![Logo](/media/Logo.png) &nbsp; SFPEG LWR Components
 
-⚠️ This repository is still Work In Progress 🚧
 
 ## Introduction
 
@@ -13,9 +12,9 @@ for enhanced workspaces).
 These components were built as contributions/examples for former & ongoing Advisory assignments by 
 [Pierre-Emmanuel Gros](https://github.com/pegros). 
 
-They heavily rely on standard Lightning framework features such as the Lightning Data Service (LDS) 
-and try to apply as much as possible the LWR specific design tokens or even standard Salesforce
-Design System (SLDS) when compatible. 
+They heavily rely on standard Lightning framework features such as the **Lightning Data Service** (LDS) 
+and try to apply as much as possible the LWR specific design tokens or even standard **Salesforce Lightning
+Design System** (SLDS) when compatible. 
 
 As much attention as possible has been paid to internationalisation requirements (at least languages),
 leveraging standard mechanisms to translate labels, field names, picklist values...
@@ -51,7 +50,7 @@ before actual display to bypass some URL and accessibility issues.
 This container component provides the ability to display CMS content via any LWC component
 for a list of CMS Content identified as a stringified JSON array of ContentKeys.
 This is especially useful to display CMS content related to the current CMS content
-being displayed (see details of `sfpegPage` custom CMS content below)
+being displayed (see details of `sfpegPage` custom CMS content below).
 
 ![CMS Content List Display](/media/sfpegCmsListDisplay.png)
 
@@ -66,8 +65,8 @@ and icon names).
 ### Conditional Display Utilities
 
 This section groups a set of components addressing conditional display in LWR Sites.
-Standard out of the box conditions indeed leverage only User related conditions
-but, most of the times, display conditions include record properties.
+Standard out of the box conditions indeed leverage only User related conditions but,
+most of the times, display conditions include record properties.
 
 All of them provide slots to drop other LWC components depending on the evaluated 
 conditions.
@@ -117,7 +116,7 @@ LWR Experience sites (see [WAI](https://www.w3.org/WAI/standards-guidelines/) or
 
 When using Salesforce Lightning base components, many accessibility requirements
 are already met (see [SLDS Accessibility](https://www.lightningdesignsystem.com/accessibility/overview/))
-but some are more related to page structure and frequire add-ons.
+but some are more related to page structure and require add-ons.
 
 
 #### [sfpegSkipLinksDsp](/help/sfpegSkipLinksDsp.md)
